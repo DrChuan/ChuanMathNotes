@@ -1,0 +1,179 @@
+\section*{习题1}
+\addcontentsline{toc}{section}{习题1}
+
+1. 
+设 $x_1, x_2, \dots, x_n$ 均满足方程，则方程可化为
+$$a_n(x-x_1)(x-x_2)\cdots(x-x_n) = 0$$
+
+取 $x = x_i \ (i=1,2,\dots,n)$，则右边恒为 0，方程成立.
+$$a_n(x-x_1)(x-x_2)\cdots(x-x_n) = 0 \implies a_n = 0$$
+
+方程变为 $a_{n-1}x^{n-1} + a_{n-2}x^{n-2} + \dots + a_0 = 0$
+
+重复 $n$ 次，即 $a_n = a_{n-1} = \dots = a_0 = 0$
+
+\vspace{1em}
+2.
+假设 $\forall \bar n-1$ 次多项式 $Q(x)$， $P(x) \neq (x-x_1)Q(x)$
+
+设 $P(x)$ 的 $n$ 次项系数为 $a_n$，必存在 $x_2, x_3, \dots, x_n \in \mathbb{R}$， $x_i \neq x_1 \ (i=2,3,\dots,n)$
+
+取 $Q_0(x) = a_n(x-x_2)(x-x_3)\cdots(x-x_n)$，则 $P(x) = Q_0(x)(x-x')$， 其中 $x' \neq x_1$ 
+
+由于 $Q_0(x_1) \neq 0 \implies P(x_1) = Q_0(x_1)(x_1-x') \neq 0$，与 $x_1$ 是 $P(x)$ 零点矛盾！ $\implies$ 存在 $Q$
+
+\vspace{1em}
+3.
+假设 $P(x)$ 有至少 $n+1$ 个真零点，不妨设为 $x_1, x_2, \dots, x_{n+1}$（其中 $x_i, x_j$ 可以相等
+
+应用第 2 题的结论 $n$ 次可知存在 0 次多项式 $Q(x)$， s.t.
+$$P(x) = (x-x_1)(x-x_2)\cdots(x-x_n)Q(x)$$
+
+则 $x_{n+1}$ 是 $Q(x)$ 的零点，而 $Q(x)$ 为非零常数多项式，没有零点，矛盾！$\implies$ 假设不成立，$P(x)$ 至多有 $n$ 个真零点
+
+\vspace{1em}
+4.
+\textcolor{magenta}{（韦达定理）}由 2. $P(x) = a_n \prod_{j=1}^n (x-x_j)$
+\begin{align*}
+    &= a_n \sum_{k=0}^n \left( \sum_{1 \le j_1 < \dots < j_{n-k} \le n} \prod_{i=1}^{n-k} (-x_{j_i}) \right) x^k \\
+    &= a_n \sum_{k=0}^n \left( (-1)^{n-k} \sum_{1 \le j_1 < \dots < j_{n-k} \le n} \prod_{i=1}^{n-k} x_{j_i} \right) x^k
+\end{align*}
+
+$x^k$ 的系数为 $a_n (-1)^{n-k} \sum_{1 \le j_1 < \dots < j_{n-k} \le n} \prod_{i=1}^{n-k} x_{j_i}$
+
+所以 $a_n (-1)^k \sum_{1 \le j_1 < \dots < j_k \le n} \prod_{i=1}^k x_{j_i} = a_{n-k}$
+
+即 $\sum_{1 \le j_1 < \dots < j_k \le n} \prod_{i=1}^k x_{j_i} = (-1)^k \frac{a_{n-k}}{a_n}$
+
+\vspace{1em}
+5.
+$f: (0, 1) \to [0, 1]$
+$$f(x) = \begin{cases}
+0, & x = \frac{1}{2} \\
+1, & x = \frac{1}{3} \\
+\frac{1}{n}, & x = \frac{1}{n+2} \ (n=2,3,\dots) \\
+x, & \text{others}
+\end{cases}$$
+
+一方面，每一段映射互不相交，$f$ 是单射；
+
+另一方面，$\forall y \in [0, 1]$， $\exists x \in (0, 1)$ s.t. $f(x)=y$，$f$ 是满射.
+
+\vspace{1em}
+6.
+设 $q_1, q_2 \in \mathbb{Q}$，满足 $T(q_1) = T(q_2)$
+
+$1^\circ$ 若 $q_1 = 0$，则 $T(q_1) = 0 \implies T(q_2) = 0$
+
+$q_2 > 0$ 时，$T(q_2) > 0$，不符合前提；
+
+$q_2 < 0$ 时，$T(q_2) < 0$，亦不符合前提.
+
+$\implies q_2 = 0$，即 $q_1 = q_2$
+
+$2^\circ$ 若 $q_1 > 0$，则 $T(q_1) > 0 \implies T(q_2) > 0$
+
+设 $q_1 = \frac{m_1}{n_1}$， $q_2 = \frac{m_2}{n_2}$，则 $(m_1+n_1)^2+n_1 = (m_2+n_2)^2+n_2$
+
+若 $m_1+n_1 \neq m_2+n_2$，不妨设 $m_1+n_1 > m_2+n_2$，即 $m_1+n_1 \ge m_2+n_2+1$，则 $(m_2+n_2+1)^2+n_1 \le (m_1+n_1)^2+n_1$$\implies 2(m_2+n_2)+1+n_1 \le n_2$，即 $2m_2+n_2+n_1+1 \le 0$，显然不成立.
+
+所以$ m_1+n_1 = m_2+n_2 \implies n_1 = n_2, m_1 = m_2 \implies q_1 = q_2$
+
+$3^\circ$ 若 $q_1 < 0$，与 $2^\circ$ 完全相同，$q_1 = q_2$
+
+综上，$T(q_1) = T(q_2) \implies q_1 = q_2$，即 $T$ 为单射.
+
+\vspace{1em}
+7.笔记部分定理 1.4.7 已证.
+
+\vspace{1em}
+8.
+$\sqrt{3}+\sqrt{2}$ 是 $x^4-10x^2+1$ 的零点. 由 Liouville 定理 $\exists A > 0$, s.t. $\forall q \in \mathbb{Z}, p \in \mathbb{Z}^*$,
+$$\left| \sqrt{3}+\sqrt{2} - \frac{q}{p} \right| > \frac{A}{p^4}$$
+
+\vspace{1em}
+9.
+$$\overline{\overline{\left\{ \sum_{k=1}^\infty \frac{n_k}{10^{k!}} \ \bigg| \ n_k=1,2,\dots,9 \right\}}} = \overline{\overline{\{ 9^k \mid k \in \mathbb{N}^* \}}} = 9^{\aleph_0} = \aleph$$
+
+设 $x = \sum_{k=1}^\infty \frac{n_k}{10^{k!}}$， $n_k=1,2,\dots,9$. $\forall n \in \mathbb{N}^*$， $\sum_{k=1}^n \frac{n_k}{10^{k!}} \in \mathbb{Q}$， 令 $\frac{q}{p} = \sum_{k=1}^n \frac{n_k}{10^{k!}} \implies p \le 10^{n!}$
+$$\left| x - \frac{q}{p} \right| = \sum_{k=n+1}^\infty \frac{n_k}{10^{k!}} < \sum_{k=n+1}^\infty \frac{9}{10^{k!}} = \frac{1}{10^{(n+1)!-1}} < \frac{1}{10^{n \cdot n!}} \le \frac{1}{p^n}$$
+
+$\implies x$ 是刘维尔数.
+
+\vspace{1em}
+10.
+(1) 设 $R(x_1, x_2, \dots, x_n) = \sum_{i=1}^n a_i x_i$. 由于 $R(x_1, x_2, \dots, x_n)$ 对称， $\forall 1 \le i < j \le n$，有：
+$$R(x_1, \dots, x_i, \dots, x_j, \dots, x_n) = R(x_1, \dots, x_j, \dots, x_i, \dots, x_n)$$
+
+即 $a_i x_i + a_j x_j = a_i x_j + a_j x_i \quad (\forall x_i, x_j)$ $\implies a_i = a_j$ $\implies a_1 = a_2 = \dots = a_n$，即
+$$R(x_1, x_2, \dots, x_n) = a_1(x_1 + x_2 + \dots + x_n)$$
+
+(2) 设 $R(x_1, \dots, x_n) = \sum_{i=1}^n a_i x_i^2 + \sum_{1 \le i < j \le n} a_{ij} x_i x_j$. $\forall 1 \le i < j \le n$, 
+\begin{align*}
+    R(x_1, \dots, x_i, \dots, x_j, \dots, x_n)&= \sum_{k \neq i,j} a_k x_k^2 + \sum_{k < l, \ k,l \neq i,j} a_{kl} x_k x_l + a_i x_j^2 + a_j x_i^2 \\
+    &\quad + \sum_{k \neq i,j} a_{ik} x_j x_k + \sum_{k \neq i,j} a_{jk} x_i x_k + a_{ij} x_j x_i \\
+    &= R(x_1, \dots, x_n)
+\end{align*}
+
+$\implies a_i = a_j$, $a_{ik} = a_{jk} \ (\forall k)$ $\implies \forall i, j, k, l$, $a_{ij} = a_{kl}$ $\implies R(x_1, \dots, x_n) = a_1 \sum_{i=1}^n x_i^2 + a_{12} \sum_{i < j} x_i x_j$
+
+(3) 规定以下符号：$\sigma_{n,k} = \sum_{1 \le i_1 < \dots < i_k \le n} \prod_{j=1}^k x_{i_j}$，$P_{n,d} = \{ F \mid F \text{为 } n \text{ 元 } d \text{ 次对称有理多项式} \}$ 
+
+下证 $\forall n \in \mathbb{N}^*, d \in \mathbb{N}^*, F \in P_{n,d}$，存在 $\le d$ 次有理多项式 $S$，s.t.
+$$F(x_1, x_2, \dots, x_n) = S(\sigma_{n,1}, \dots, \sigma_{n,n})$$
+
+$1^\circ \ n=1$ 时，$\forall d \in \mathbb{N}^*$, $\forall F \in P_{1,d}$, $F(x_1) = c x_1^d = c \sigma_{1,1}^d$ 成立；
+
+$d=1$ 时，$\forall n \in \mathbb{N}^*$, $\forall F \in P_{n,1}$，由 (1)，$F(x) = c(x_1+x_2+\dots+x_n) = c \sigma_{n,1}$ 成立.
+
+$2^\circ$ 假设对 $<n$ 元时 $\forall d \in \mathbb{N}^*$ 成立，$ < d$ 次时 $\forall n \in \mathbb{N}^*$ 成立. 下证 $n$ 元 $d$ 次时成立.$\forall F \in P_{n,d}$, \\
+
+令 $G(x_1, x_2, \dots, x_{n-1}) = F(x_1, \dots, x_{n-1}, 0)$，则 $G \in P_{n-1,d}$. 由归纳假设 (1)，$\exists S$ s.t. $G(x_1, \dots, x_{n-1}) = S(\sigma_{n-1,1}, \dots, \sigma_{n-1,n-1})$ 
+
+令 $H(x_1, \dots, x_n) = F(x_1, \dots, x_n) - S(\sigma_{n,1}, \sigma_{n,2}, \dots, \sigma_{n,n-1})$，易知 $\sigma_{n,i}(x_1, \dots, x_{n-1}, 0) = \sigma_{n-1,i}(x_1, \dots, x_{n-1})$$\implies H(x_1, \dots, x_{n-1}, 0) = G(x_1, \dots, x_{n-1}) - S(\sigma_{n-1,1}, \dots, \sigma_{n-1,n-1}) = 0$. 
+由因式定理，$H(x_1, \dots, x_n) = x_n H_1(x_1, \dots, x_n)$. 
+
+由于 $F$，$S$ 及 $\sigma_{n,i}$ 都是 $n$ 元对称的，$H$ 也是 $n$ 元对称的$\implies H(x_1, \dots, x_n) = x_1 x_2 \dots x_n H_0(x_1, \dots, x_n) = \sigma_{n,n} H_0(x_1, \dots, x_n)$.
+又由于 $G$ 为 $d$ 次，$\implies S$ 为 $d$ 次$\implies H = F - S$ 不超过 $d$ 次 $\implies H_0$ 不超过 $d-n$.
+由归纳假设 (2)，$\exists T$， $H_0(x_1, \dots, x_n) = T(\sigma_{n,1}, \dots, \sigma_{n,n})$ $\implies F(x_1, \dots, x_n) = \sigma_{n,n} T(\sigma_{n,1}, \dots, \sigma_{n,n}) + S(\sigma_{n,1}, \dots, \sigma_{n,n-1})$
+即 $\forall F \in P_{n,d}$ 命题成立.
+
+综上，结合韦达定理知 $\sigma_{n,i} \in \mathbb{Q}$，原命题得证
+
+\vspace{1em}
+11.
+(1) 
+\begin{align*}
+    R(x) &= \prod_{j=1}^n \left[ \prod_{i=1}^m (x - x_i - y_j) \right] = \prod_{j=1}^n \left[ \prod_{i=1}^m ((x - y_j) - x_i) \right] \\
+    &= \prod_{j=1}^n P(x - y_j)
+\end{align*}
+
+设 $P(x) = a_m x^m + a_{m-1} x^{m-1} + \dots + a_0$，则 $R(x) = \prod_{j=1}^n \left( a_m (x - y_j)^m + a_{m-1} (x - y_j)^{m-1} + \dots + a_0 \right)$ \\
+其中 $x^k$ 的系数 $T_k$ 为关于 $y_1, \dots, y_n$ 的对称多项式，且系数均为 $a_1, \dots, a_m$ 的和、差、积，因而为有理数。
+
+又 $y_1, \dots, y_n$ 是 $Q(x)$ 的零点，由 10(3)，$T_k \in \mathbb{Q}$。即 $R(x)$ 为有理系数多项式。
+
+(2)
+\begin{align*}
+    S(x) &= \prod_{i=1}^m \prod_{j=1}^n (x - x_i y_j) = \prod_{j=1}^n \prod_{i=1}^m y_j \left(\frac{x}{y_j} - x_i\right) \\
+    &= \prod_{j=1}^n y_j^m P\left(\frac{x}{y_j}\right) = \prod_{j=1}^n y_j^m \left[ a_m \left(\frac{x}{y_j}\right)^m + a_{m-1} \left(\frac{x}{y_j}\right)^{m-1} + \dots + a_0 \right] \\
+    &= \prod_{j=1}^n ( a_m x^m + a_{m-1} y_j x^{m-1} + \dots + a_0 y_j^m )
+\end{align*}
+
+与 (1) 同理可得 $S(x)$ 为有理系数多项式。
+
+\vspace{1em}
+12.
+\textcolor{magenta}{前面证过了！}
+
+\vspace{1em}
+13.
+$\Leftarrow)$ 设 $x_0, y_0$ 是有理系数多项式 $P(x), Q(x)$ 的零点.$Q(x) = (x-y_1)(x-y_2)\dots(x-y_n)(x-y_0) \quad I(x) = x^2+1 = (x+i)(x-i)$
+
+由 11(2) $S(x) = (x-y_1 i)\cdots(x-y_n i)(x-y_0 i)(x+y_1 i)\cdots(x+y_n i)(x+y_0 i)$也是有理系数多项式，而 $y_0 i$ 是其零点 $\implies y_0 i$ 是代数数，进而由 11(1) 可知 $x_0 + y_0 i$ 为代数数。
+
+$\Rightarrow)$ 设 $z_0 = x_0 + y_0 i$ 是代数数，则存在有理系数多项式 $P(x)$
+$$P(z_0) = 0 \implies P(\bar{z}_0) = \overline{P(z_0)} = 0$$
+
+$x_0 = \frac{z_0 + \bar{z}_0}{2}, \ y_0 = \frac{z_0 - \bar{z}_0}{2i}$，由 11(1)(2)，$x_0, y_0$ 是代数数。
+

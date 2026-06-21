@@ -10,6 +10,7 @@
 % \usepackage[varg]{newtxmath} % 将数学公式的字体改为 Times 风格（也就是 MathType 同款）
 \usepackage{mathptmx}
 \usepackage{amsfonts}
+\usepackage{amssymb}
 % \usepackage{times}
 \usepackage{graphicx} % 图片支持
 \usepackage{setspace} % 行距调整
@@ -48,6 +49,9 @@
 % \allsectionsfont{\sffamily\bfseries}
 \usepackage{fontspec}
 \setmainfont{Times New Roman} % 英文设置
+
+\theoremstyle{remark}
+\newtheorem*{remark}{注}
 
 \usepackage{titlesec}
 
@@ -125,7 +129,7 @@
 \declaretheorem[style=thmblue, name={\heiti 命题}, numberlike=theorem]{proposition}
 \declaretheorem[style=thmblue, name={\heiti 推论}, numberlike=theorem]{corollary}
 
-\declaretheorem[style=thmred, name={\heiti 定义}, numberlike=theorem]{definition}
+\declaretheorem[style=thmred, name={\heiti 定义}, numberwithin=section]{definition}
 
 % 例题环境 (不用色块，用简单的灰色左边框区分)
 \declaretheoremstyle[

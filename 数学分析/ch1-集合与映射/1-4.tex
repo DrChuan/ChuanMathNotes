@@ -1,0 +1,81 @@
+\section{集合的势}
+
+\begin{definition}[基数，势，有限集，可数集，连续统 / 连续势]
+    略
+\end{definition}
+
+\begin{theorem}
+    $\forall E$, $2^{\overline{\overline{E}}} > \overline{\overline{E}}$
+\end{theorem}
+\begin{proof}
+显然 $2^{\overline{\overline{E}}} \ge \overline{\overline{E}}$，下证两者不相等。
+
+假设 $2^{\overline{\overline{E}}} = \overline{\overline{E}}$，则 $\exists$ 双射 $T: E \to 2^E$. 构造集合 $A = \{ x \in E \mid x \notin T(x) \}$
+\textcolor{orange}{(所有映射到不包含自己的子集的元素)}
+
+$A \subseteq E \implies A \in 2^E$， 则 $\exists x_0$, s.t. $T(x_0) = A$. 
+
+若 $x_0 \notin A \implies T(x_0) \implies x_0 \in A$ 矛盾！$\implies 2^{\overline{\overline{E}}} \neq \overline{\overline{E}} \implies 2^{\overline{\overline{E}}} > \overline{\overline{E}}$
+\end{proof}
+
+$\to$ 记 $2^{\overline{\overline{E}}}$ 为 $2^E$
+
+\begin{corollary}
+    $2^{\aleph_0} > \aleph_0$
+\end{corollary}
+
+\begin{theorem}
+    可列个可列集的并是可列集.
+\end{theorem}
+$\aleph_0^2 = \aleph_0 \times \aleph_0 = \aleph_0 \xrightarrow{(n)} \aleph_0^n = \aleph_0 \quad (\forall n \ge 1)$
+
+\begin{corollary}
+    $\overline{\overline{\mathbb{Q}}} = \aleph_0$
+\end{corollary}
+
+\begin{theorem}
+    $\aleph > \aleph_0$
+\end{theorem}
+\begin{proof}
+$\overline{\overline{(0, 1)}} = \aleph$，只需证 $\overline{\overline{(0, 1)}} > \aleph_0$. \\
+假设 $\overline{\overline{(0, 1)}} = \aleph_0$， 则可以把 $(0, 1)$ 所有数排成一列. \\
+将其十进制小数表示为 $x_k = 0.a_{k1}a_{k2}\dots \quad (k=1, 2, \dots)$ \\
+令 $y = 0.y_1y_2\dots$， 其中 $y_k = \begin{cases} 1, & a_{kk} \neq 1 \\ 2, & a_{kk} = 1 \end{cases}$ \\
+\textcolor{orange}{$\to$ 让 $y$ 的第 $k$ 位与 $x_k$ 不同. 也可以 $y_k = 9 - a_{kk}$} \\
+则 $\forall k \in \mathbb{N}^*$, $y \neq x_k$， 而 $y \in (0, 1)$， 矛盾！ \\
+$\implies \overline{\overline{(0, 1)}} > \aleph_0$， 即 $\aleph > \aleph_0$.
+\end{proof}
+
+\begin{theorem}[Bernstein 定理]
+    若 $\overline{\overline{A}} \le \overline{\overline{B}}$，$\overline{\overline{B}} \le \overline{\overline{A}}$，则 $\overline{\overline{A}} = \overline{\overline{B}}$
+\end{theorem}
+
+代数数，超越数 
+
+{$\cdot$ 全体代数数构成一个域.} 
+
+{$\cdot$ 一个数为代数数 $\iff$ 实部、虚部均为代数数.}
+
+\begin{theorem}
+    代数数集是可列集
+\end{theorem}
+\begin{proof}
+$\forall n \ge 1$, $a_nx^n + a_{n-1}x^{n-1} + \dots + a_1x + a_0$ 的总数 $\le \aleph_0^{n+1} = \aleph_0$. \\
+零点数 $\le n$ 对应的代数数集 $A_n$，$\overline{\overline{A_n}} = \aleph_0$. \\
+代数数集 $A = \bigcup_{n=1}^\infty A_n$， 由定理 1.4.3， $\overline{\overline{A}} = \aleph_0$.
+\end{proof}
+
+\begin{theorem}
+    \quad $\aleph = 2^{\aleph_0}$
+\end{theorem}
+\begin{proof}
+(1) $\overline{\overline{(0, 1)}} \to 2^{\mathbb{N}^*}$, $x = \sum_{n=1}^\infty a_n 2^{-n} \quad (a_n \in \{0, 1\})$ \\
+$F(x) = \{ n \in \mathbb{N}^* \mid a_n = 1 \}$ 是从 $(0, 1)$ 到 $2^{\mathbb{N}^*}$ 的单射. \\
+(若 $F(x_1) = F(x_2)$， 显然有 $x_1 = x_2$) \\
+$\implies 2^{\aleph_0} \ge \overline{\overline{(0, 1)}}$ \\
+(2) $2^{\mathbb{N}^*} \to (0, 1)$: $\quad E \subset \mathbb{N}^*$, \\
+$G(E) = 0.a_1a_2\dots$， 其中 $a_n = \begin{cases} 1, & n \in E \\ 0, & \text{其他} \end{cases}$ \\
+是从 $2^{\mathbb{N}^*}$ 到 $(0, 1)$ 的单射 \\
+$\implies \overline{\overline{(0, 1)}} \ge 2^{\aleph_0}$ \\
+由 Bernstein 定理，$2^{\aleph_0} = \overline{\overline{(0, 1)}}$， 即 $2^{\aleph_0} = \aleph$
+\end{proof}
