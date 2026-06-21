@@ -1,0 +1,63 @@
+\section{4}
+
+\begin{theorem}[n次方根的存在唯一性]
+    设 $a > 0$，$n \in \mathbb{N}^*$，则方程 $x^n = a$ 有唯一正解。
+\end{theorem}
+
+\begin{proof}
+
+$1^\circ$ （证明 $x_0$ 唯一）
+已知 $s > t > 0 \implies s^n > t^n$。因此，若 $x_0^n = a$：
+$$
+\begin{cases}
+x' > x_0 \implies x'^n > x_0^n = a \\
+x' < x_0 \implies x'^n < x_0^n = a
+\end{cases}
+\implies x_0 \text{ 唯一。}
+$$
+
+$2^\circ$ （证明 $x_0$ 存在）
+构造集合 $E_a := \{ y \mid y > 0, y^n \le a \}$。
+
+(i) （证明 $E_a$ 非空且有上界）
+令 $s < 1$ 且 $s < a$，则 $s^n < s < a \implies s \in E_a$，即 $E_a$ 非空。
+若 $y \ge 1+a > 1$，则 $y^n \ge (1+a)^n > 1+a > a \implies y \notin E_a$。
+这说明 $1+a$ 是 $E_a$ 的一个上界。令 $x = \sup E_a$。
+
+(ii) （证明 $x^n = a$）
+(1)若 $x^n > a$ （构造 $\varepsilon$ 使得 $(x-\varepsilon)^n \ge a \implies x-\varepsilon$ 也是上界）
+令 $\varepsilon = \frac{x^n - a}{(x+1)^n} \in (0, 1)$，则：
+$$
+\begin{aligned}
+(x-\varepsilon)^n &= x^n + \sum_{k=1}^n C_n^k x^{n-k} (-\varepsilon)^k \\
+&> x^n - \sum_{k=1}^n C_n^k x^{n-k} \varepsilon^k \\
+&> x^n - \varepsilon \sum_{k=1}^n C_n^k x^{n-k} \\
+&= x^n - \varepsilon ((x+1)^n - x^n) \\
+&> x^n - \varepsilon (x+1)^n \\
+&= x^n - (x^n - a) = a
+\end{aligned}
+$$
+$\implies x-\varepsilon$ 是 $E_a$ 的上界，与 $x$ 为上确界矛盾。
+
+(2)若 $x^n < a$ （构造 $\varepsilon$ 使得 $(x+\varepsilon)^n < a \implies x$ 不是上界）
+令 
+$$
+\varepsilon = \begin{cases}
+\frac{a - x^n}{(x+1)^n}, & \frac{a - x^n}{(x+1)^n} < 1 \\
+1, & \text{others}
+\end{cases}
+$$
+此时 $\varepsilon \in (0, 1]$。则：
+$$
+\begin{aligned}
+(x+\varepsilon)^n &= x^n + \sum_{k=1}^n C_n^k x^{n-k} \varepsilon^k \\
+&\le x^n + \varepsilon \sum_{k=1}^n C_n^k x^{n-k} \\
+&= x^n + \varepsilon ((x+1)^n - x^n) \\
+&< x^n + \varepsilon (x+1)^n \\
+&\le x^n + a - x^n = a
+\end{aligned}
+$$
+$\implies x+\varepsilon \in E_a$，与 $x$ 为上界矛盾。
+
+综上，$x^n = a$，即 $x$ 为 $x^n = a$ 的唯一正数解。
+\end{proof}

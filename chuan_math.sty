@@ -1,0 +1,215 @@
+\ProvidesPackage{chuan_math}
+
+% ==========================================
+% 1. 基础宏包加载
+% ==========================================
+
+\usepackage{amsmath, amsthm} % 引入基础数学和定理环境
+% \usepackage[lining,tabular]{newtxtext}
+% \usepackage{newtxtext}       % 将正文的英文和数字改为 Times New Roman 字体
+% \usepackage[varg]{newtxmath} % 将数学公式的字体改为 Times 风格（也就是 MathType 同款）
+\usepackage{mathptmx}
+\usepackage{amsfonts}
+% \usepackage{times}
+\usepackage{graphicx} % 图片支持
+\usepackage{setspace} % 行距调整
+\usepackage{geometry} % 页面边距调整
+\usepackage{hyperref} % 交叉引用和超链接
+\usepackage[utf8]{inputenc}
+\usepackage[dvipsnames]{xcolor} % 颜色包
+\usepackage{tcolorbox} % 精美文本框
+\usepackage{thmtools} % 定理环境管理
+\usepackage{environ} % 用于捕获环境体（做答案开关）
+\usepackage{tasks} % 优雅排版选择题
+% 1. 彻底清空默认配置，不要让系统自作聪明
+\usepackage[fontset=none]{ctex}
+
+
+% 2. 闭环读取：强制只读当前文件夹里的 simsun 文件
+\setCJKmainfont{SimSun}[
+    Path = ./ ,
+    Extension = .ttf ,   % 如果你拷进去的文件是 .ttf，这里必须改成 .ttf
+    UprightFont = * ,
+    BoldFont = * ,
+    AutoFakeBold = true
+]
+\setCJKsansfont{SimHei}[
+    Path = ./ ,
+    Extension = .ttf ,   % 如果你拷进去的文件是 .ttf，这里必须改成 .ttf
+    UprightFont = * ,
+    BoldFont = * ,
+    AutoFakeBold = true
+]
+\setCJKfamilyfont{hei}{SimHei}[Path = ./ , Extension = .ttf , AutoFakeBold = true]
+\newcommand{\heiti}{\CJKfamily{hei}}
+\setCJKfamilyfont{kaishu}{SimKai.ttf}[Path = ./ ]
+\newcommand{\kaishu}{\CJKfamily{kaishu}}
+\usepackage{sectsty}
+% \allsectionsfont{\sffamily\bfseries}
+\usepackage{fontspec}
+\setmainfont{Times New Roman} % 英文设置
+
+\usepackage{titlesec}
+
+% 针对 section 的设置
+\titleformat{\section}
+  {\bfseries\LARGE\centering}              % 标题的通用属性（如加粗、字号）
+  {\fontspec{Times New Roman}\thesection} % 编号：强制调用 Times New Roman
+  {0.5em}                          % 编号和文字之间的距离
+  {\heiti}                    % 标题文字：调用黑体 (因为你前面设置了 \setCJKsansfont{SimHei})
+
+% 针对 chapter 的设置
+\titleformat{\chapter}
+  {\heiti\bfseries\huge\centering} % 1. 全局调用黑体、加粗、\huge(加大)、\centering(居中)
+  {第\zhnum{chapter}章}             % 2. 编号直接改用汉字数字，去掉了英文数字的Times字体
+  {0.5em}                            % 3. 编号和文字之间的距离
+  {}                               % 4. 留空，因为前面第一步已经全局指定了 \heiti
+
+
+
+
+\everymath{\displaystyle}
+% ==========================================
+% 2. 页面与排版全局设置
+% ==========================================
+\setstretch{1.65} % 全局行距，1.25比较适合屏幕阅读和打印
+\geometry{
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=3cm,
+    bottom=3cm,
+    headheight=15pt
+}
+\hypersetup{colorlinks=true, linkcolor=NavyBlue, citecolor=NavyBlue} % 链接颜色设置
+
+% ==========================================
+% 3. 颜色主题定义 (极简学术风)
+% ==========================================
+\colorlet{ThemeBlue}{Cyan!8}       % 淡蓝色 (用于定理、命题)
+\colorlet{ThemeRed}{WildStrawberry!8} % 水红色 (用于定义、重要结论)
+\colorlet{ThemeGray}{black!5}      % 浅灰色 (用于例题)
+
+% ==========================================
+% 4. 大学数学笔记环境 (定理、定义、命题等)
+% ==========================================
+% 定义定理样式
+\declaretheoremstyle[
+    headfont=\bfseries,
+    bodyfont=\normalfont,
+    headpunct={\ },
+    mdframed={
+        backgroundcolor=ThemeBlue,
+        linecolor=Cyan!30,
+        linewidth=1pt,
+        topline=false, rightline=false, bottomline=false, % 只留左边框，极简风
+        innertopmargin=6pt, innerbottommargin=6pt
+    }
+]{thmblue}
+ 
+\declaretheoremstyle[
+    headfont=\bfseries,
+    bodyfont=\normalfont,
+    headpunct={\ },
+    mdframed={
+        backgroundcolor=ThemeRed,
+        linecolor=WildStrawberry!40,
+        linewidth=1pt,
+        topline=false, rightline=false, bottomline=false,
+        innertopmargin=6pt, innerbottommargin=6pt
+    }
+]{thmred}
+
+% 绑定具体环境
+\declaretheorem[style=thmblue, name={\heiti 定理}, numberwithin=section]{theorem}
+\declaretheorem[style=thmblue, name={\heiti 命题}, numberlike=theorem]{proposition}
+\declaretheorem[style=thmblue, name={\heiti 推论}, numberlike=theorem]{corollary}
+
+\declaretheorem[style=thmred, name={\heiti 定义}, numberlike=theorem]{definition}
+
+% 例题环境 (不用色块，用简单的灰色左边框区分)
+\declaretheoremstyle[
+    headfont=\bfseries,
+    bodyfont=\normalfont,
+    headpunct={\ },
+    mdframed={
+        backgroundcolor=ThemeGray,
+        linecolor=black!20,
+        linewidth=2pt,
+        topline=false, rightline=false, bottomline=false,
+        innertopmargin=6pt, innerbottommargin=6pt
+    }
+]{thmgray}
+\declaretheorem[style=thmgray, name={\heiti 例题}, numberwithin=section]{example}
+
+% ==========================================
+% 5. 高中题库专用环境 (题目、开关、选择题)
+% ==========================================
+% 答案显示开关：想生成不带答案的试卷，就把下面这行改成 \showanswerfalse
+% \newif\ifshowanswer
+% \showanswertrue  
+
+\newcommand{\setdisplay}[1]{\def\displaymode{#1}}
+\setdisplay{2} % 模板默认全局开启完整版
+
+\newcounter{exercise}[section]
+\newenvironment{exe}[1][]{%
+    \nopagebreak\par\noindent
+    \refstepcounter{exercise}%
+    {\bfseries \theexercise .}%
+    % 当模式为 1 或 2 时，显示蓝色的标签
+    \ifnum\displaymode>0 
+        \setbox0=\hbox{#1}\ifdim\wd0>0pt 
+            \hspace{0.3em}{\footnotesize\color{Plum}\textbf{[#1]}}%
+        \fi
+    \fi
+    \hspace{0.5em}\ignorespaces
+}{%
+    \par
+}
+
+% 答案/解析环境
+\NewEnviron{sol}{
+    \ifnum\displaymode>0
+        \nopagebreak
+        % 把 \begin{small} 换成大括号包裹的 {\small ... \par}
+        {\small
+            \noindent\textbf{\textcolor{NavyBlue}{【解析】}}\ \BODY\par
+        }
+        \vspace{0.8em}
+    %\else
+    \fi
+}
+
+\NewEnviron{note}{
+    \ifnum\displaymode>1
+        \nopagebreak
+        {\small
+            % 使用松石绿/墨绿色，与解析的蓝色拉开视觉反差
+            \noindent\textbf{\textcolor{PineGreen}{【备注】}}\ \BODY\par
+        }
+        \vspace{0.8em}
+    \fi
+}
+
+% 选择题 tasks 环境配置
+\settasks{
+    label=\Alph*．︀,
+    label-width=1.5em,
+    item-indent=3.5em,
+    column-sep=1em,
+    after-item-skip=-0.2em,
+    before-skip=-0.9em
+}
+
+% ==========================================
+% 6. 封面辅助命令
+% ==========================================
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\AtBeginDocument{
+    \setlength{\abovedisplayskip}{3pt plus 1pt minus 1pt}
+    \setlength{\belowdisplayskip}{3pt plus 1pt minus 1pt}
+    \setlength{\abovedisplayshortskip}{0pt plus 1pt}
+    \setlength{\belowdisplayshortskip}{3pt plus 1pt minus 1pt}
+}
