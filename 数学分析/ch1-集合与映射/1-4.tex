@@ -8,7 +8,7 @@
     $\forall E$, $2^{\overline{\overline{E}}} > \overline{\overline{E}}$
 \end{theorem}
 \begin{proof}
-显然 $2^{\overline{\overline{E}}} \ge \overline{\overline{E}}$，下证两者不相等。
+显然 $2^{\overline{\overline{E}}} \ge \overline{\overline{E}}$，下证两者不相等. 
 
 假设 $2^{\overline{\overline{E}}} = \overline{\overline{E}}$，则 $\exists$ 双射 $T: E \to 2^E$. 构造集合 $A = \{ x \in E \mid x \notin T(x) \}$
 \textcolor{orange}{(所有映射到不包含自己的子集的元素)}
@@ -69,13 +69,66 @@ $\forall n \ge 1$, $a_nx^n + a_{n-1}x^{n-1} + \dots + a_1x + a_0$ 的总数 $\le
     \quad $\aleph = 2^{\aleph_0}$
 \end{theorem}
 \begin{proof}
-(1) $\overline{\overline{(0, 1)}} \to 2^{\mathbb{N}^*}$, $x = \sum_{n=1}^\infty a_n 2^{-n} \quad (a_n \in \{0, 1\})$ \\
-$F(x) = \{ n \in \mathbb{N}^* \mid a_n = 1 \}$ 是从 $(0, 1)$ 到 $2^{\mathbb{N}^*}$ 的单射. \\
-(若 $F(x_1) = F(x_2)$， 显然有 $x_1 = x_2$) \\
-$\implies 2^{\aleph_0} \ge \overline{\overline{(0, 1)}}$ \\
-(2) $2^{\mathbb{N}^*} \to (0, 1)$: $\quad E \subset \mathbb{N}^*$, \\
-$G(E) = 0.a_1a_2\dots$， 其中 $a_n = \begin{cases} 1, & n \in E \\ 0, & \text{其他} \end{cases}$ \\
-是从 $2^{\mathbb{N}^*}$ 到 $(0, 1)$ 的单射 \\
-$\implies \overline{\overline{(0, 1)}} \ge 2^{\aleph_0}$ \\
-由 Bernstein 定理，$2^{\aleph_0} = \overline{\overline{(0, 1)}}$， 即 $2^{\aleph_0} = \aleph$
+(1) $\overline{\overline{(0, 1)}} \to 2^{\mathbb{N}^*}$, $x = \sum_{n=1}^\infty a_n 2^{-n} \quad (a_n \in \{0, 1\})$. $F(x) = \{ n \in \mathbb{N}^* \mid a_n = 1 \}$ 是从 $(0, 1)$ 到 $2^{\mathbb{N}^*}$ 的单射(若 $F(x_1) = F(x_2)$， 显然有 $x_1 = x_2$). 所以，$2^{\aleph_0} \ge \overline{\overline{(0, 1)}}$
+
+(2) $2^{\mathbb{N}^*} \to (0, 1)$: $\quad E \subset \mathbb{N}^*$, $G(E) = 0.a_1a_2\dots$， 其中 $a_n = \begin{cases} 1, & n \in E \\ 0, & \text{其他} \end{cases}$ 是从 $2^{\mathbb{N}^*}$ 到 $(0, 1)$ 的单射$\implies \overline{\overline{(0, 1)}} \ge 2^{\aleph_0}$.由 Bernstein 定理，$2^{\aleph_0} = \overline{\overline{(0, 1)}}$， 即 $2^{\aleph_0} = \aleph$
 \end{proof}
+
+\vspace{1em}
+
+
+\begin{notebox}
+{\heiti 刘维尔数：} $x$：$\forall n \in \mathbb{N}^+$， $\exists p, q \in \mathbb{Z}$， $p > 1$，
+s.t. $$0 < \left| x - \frac{q}{p} \right| < \frac{1}{p^n}$$
+$\to$ 对于刘维尔数， $\forall n \in \mathbb{N}^+$，
+满足上式的 $(p, q)$ 有无数多对. 
+\end{notebox}
+
+
+\vspace{1em}
+
+\begin{notebox}
+{\heiti 狄利克雷逼近定理：} $\forall x \in \mathsf{C}_{\mathbb{R}} \mathbb{Q}$，
+有无数多对 $(p, q)$ 满足 $$0 < \left| x - \frac{q}{p} \right| < \frac{1}{p^2}$$
+
+\end{notebox}
+
+\vspace{1em}
+
+\begin{notebox}
+{\heiti 无理测度：}
+$$\sup \left\{ \mu \mid \text{存在无数多对整数 } (p, q) \text{ 满足 } 0 < \left| x - \frac{q}{p} \right| < \frac{1}{p^\mu} \right\}$$
+\end{notebox}
+
+\vspace{1em}
+
+\begin{theorem}[（关于有理逼近的）刘维尔定理]
+    设 $n \ge 2$，无理数 $x$ 是某个 $n$ 次整系数多项式的零点. 则存在常数 $A > 0$， $\forall q \in \mathbb{Z}, p \in \mathbb{Z}^+$，有 $\left| x - \frac{q}{p} \right| > \frac{A}{p^n}$
+\end{theorem}
+\begin{proof}
+设 $f(x) = a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0 = 0$，则 
+$$f\left(\frac{q}{p}\right) = a_n \frac{q^n}{p^n} + a_{n-1} \frac{q^{n-1}}{p^{n-1}} + \dots + a_1 \frac{q}{p} + a_0
+= \frac{1}{p^n} \left( a_n q^n + a_{n-1} q^{n-1} p + \dots + a_1 q p^{n-1} + a_0 p^n \right)$$
+
+所以$\left| f\left(\frac{q}{p}\right) \right| \ge \frac{1}{p^n}$，即 
+\begin{align*}
+    \left| f\left(\frac{q}{p}\right) \right| &= \left| f\left(\frac{q}{p}\right) - f(x) \right|\\
+    &= \left| a_n \left( \frac{q^n}{p^n} - x^n \right) + a_{n-1} \left( \frac{q^{n-1}}{p^{n-1}} - x^{n-1} \right) + \dots + a_1 \left( \frac{q}{p} - x \right) \right| \\
+    &= \left| \frac{q}{p} - x \right| \cdot \left| \sum_{i=1}^n a_i \sum_{j=0}^{i-1} \frac{q^j}{p^j} x^{i-j-1} \right|
+\end{align*}
+
+考虑 $\left| \frac{q}{p} - x \right| < 1$ 的情形，此时
+$$\left| \frac{q}{p} \right| \le \left| \frac{q}{p} - x \right| + |x| < 1 + |x|$$
+\begin{align*}
+    \implies \left| \sum_{j=0}^{i-1} \frac{q^j}{p^j} x^{i-j-1} \right| &\le \sum_{j=0}^{i-1} (1+|x|)^j |x|^{i-j-1} \overset{\lambda = 1+|x|}{=} \frac{\lambda^i - 1}{\lambda - 1} |x|^{i-1} \\
+    \implies \left| \sum_{i=1}^n a_i \sum_{j=0}^{i-1} \frac{q^j}{p^j} x^{i-j-1} \right| &\le a \sum_{i=1}^n \frac{\lambda^i - 1}{\lambda - 1} |x|^{i-1} < \frac{a\lambda}{\lambda - 1} \sum_{i=1}^n (\lambda|x|)^{i-1} \\
+    &= \frac{a\lambda}{\lambda - 1} \frac{(\lambda|x|)^n - \lambda|x|}{\lambda|x| - 1} \text{ 是一个常数，记作 } C，C > 0
+\end{align*}
+其中 $a = \max \{|a_1|, |a_2|, \dots, |a_n|\}$. 所以$ \left| \frac{q}{p} - x \right| \cdot C \ge \frac{1}{p^n}$ 
+
+取 $A = \min \left\{ 1, \frac{1}{C} \right\}$，则 $\forall p \in \mathbb{Z}^+, q \in \mathbb{Z}$，即有 $\left| \frac{q}{p} - x \right| \ge \frac{A}{p^n}$
+\end{proof}
+
+\summary{本节可以大致分为两个话题，一是集合的势，二是代数数、超越数、有理逼近等问题. }
+
+\summary{证明集合的势有关的命题的重要工具是Bernstein定理，通过在两个方向上分别构造单射来证明两个集合势相等.}

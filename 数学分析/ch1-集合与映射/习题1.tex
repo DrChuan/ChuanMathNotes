@@ -12,7 +12,8 @@ $$a_n(x-x_1)(x-x_2)\cdots(x-x_n) = 0 \implies a_n = 0$$
 
 重复 $n$ 次，即 $a_n = a_{n-1} = \dots = a_0 = 0$
 
-\vspace{1em}
+\sepline
+
 2.
 假设 $\forall \bar n-1$ 次多项式 $Q(x)$， $P(x) \neq (x-x_1)Q(x)$
 
@@ -22,30 +23,36 @@ $$a_n(x-x_1)(x-x_2)\cdots(x-x_n) = 0 \implies a_n = 0$$
 
 由于 $Q_0(x_1) \neq 0 \implies P(x_1) = Q_0(x_1)(x_1-x') \neq 0$，与 $x_1$ 是 $P(x)$ 零点矛盾！ $\implies$ 存在 $Q$
 
-\vspace{1em}
+\sepline
+
 3.
-假设 $P(x)$ 有至少 $n+1$ 个真零点，不妨设为 $x_1, x_2, \dots, x_{n+1}$（其中 $x_i, x_j$ 可以相等
+假设 $P(x)$ 有至少 $n+1$ 个复零点，不妨设为 $x_1, x_2, \dots, x_{n+1}$（其中 $x_i, x_j$ 可以相等
 
 应用第 2 题的结论 $n$ 次可知存在 0 次多项式 $Q(x)$， s.t.
 $$P(x) = (x-x_1)(x-x_2)\cdots(x-x_n)Q(x)$$
 
-则 $x_{n+1}$ 是 $Q(x)$ 的零点，而 $Q(x)$ 为非零常数多项式，没有零点，矛盾！$\implies$ 假设不成立，$P(x)$ 至多有 $n$ 个真零点
+则 $x_{n+1}$ 是 $Q(x)$ 的零点，而 $Q(x)$ 为非零常数多项式，没有零点，矛盾！$\implies$ 假设不成立，$P(x)$ 至多有 $n$ 个复零点
 
-\vspace{1em}
+\sepline
+
 4.
-\textcolor{magenta}{（韦达定理）}由 2. $P(x) = a_n \prod_{j=1}^n (x-x_j)$
+\textcolor{magenta}{（韦达定理）}
+
+由 2，
 \begin{align*}
-    &= a_n \sum_{k=0}^n \left( \sum_{1 \le j_1 < \dots < j_{n-k} \le n} \prod_{i=1}^{n-k} (-x_{j_i}) \right) x^k \\
-    &= a_n \sum_{k=0}^n \left( (-1)^{n-k} \sum_{1 \le j_1 < \dots < j_{n-k} \le n} \prod_{i=1}^{n-k} x_{j_i} \right) x^k
+    P(x) &= a_n \prod_{j=1}^n (x-x_i)\\
+    &= a_n \sum_{k=0}^n \left( \sum_{1 \le j_1 < \dots < j_{n-k} \le n} \prod_{j=1}^{n-k} (-x_{m_j}) \right) x^{n-k} \\
+    &= a_n \sum_{k=0}^n \left( (-1)^{k} \sum_{1 \le j_1 < \dots < j_{n-k} \le n} \prod_{j=1}^{k} x_{m_j} \right) x^{n-k}
 \end{align*}
 
-$x^k$ 的系数为 $a_n (-1)^{n-k} \sum_{1 \le j_1 < \dots < j_{n-k} \le n} \prod_{i=1}^{n-k} x_{j_i}$
+$x^{n-k}$ 的系数为 $a_n (-1)^{k} \sum_{1 \le j_1 < \dots < j_{n-k} \le n} \prod_{j=1}^{k} x_{m_j}$
 
 所以 $a_n (-1)^k \sum_{1 \le j_1 < \dots < j_k \le n} \prod_{i=1}^k x_{j_i} = a_{n-k}$
 
 即 $\sum_{1 \le j_1 < \dots < j_k \le n} \prod_{i=1}^k x_{j_i} = (-1)^k \frac{a_{n-k}}{a_n}$
 
-\vspace{1em}
+\sepline
+
 5.
 $f: (0, 1) \to [0, 1]$
 $$f(x) = \begin{cases}
@@ -59,7 +66,8 @@ x, & \text{others}
 
 另一方面，$\forall y \in [0, 1]$， $\exists x \in (0, 1)$ s.t. $f(x)=y$，$f$ 是满射.
 
-\vspace{1em}
+\sepline
+
 6.
 设 $q_1, q_2 \in \mathbb{Q}$，满足 $T(q_1) = T(q_2)$
 
@@ -83,15 +91,18 @@ $3^\circ$ 若 $q_1 < 0$，与 $2^\circ$ 完全相同，$q_1 = q_2$
 
 综上，$T(q_1) = T(q_2) \implies q_1 = q_2$，即 $T$ 为单射.
 
-\vspace{1em}
+\sepline
+
 7.笔记部分定理 1.4.7 已证.
 
-\vspace{1em}
+\sepline
+
 8.
 $\sqrt{3}+\sqrt{2}$ 是 $x^4-10x^2+1$ 的零点. 由 Liouville 定理 $\exists A > 0$, s.t. $\forall q \in \mathbb{Z}, p \in \mathbb{Z}^*$,
 $$\left| \sqrt{3}+\sqrt{2} - \frac{q}{p} \right| > \frac{A}{p^4}$$
 
-\vspace{1em}
+\sepline
+
 9.
 $$\overline{\overline{\left\{ \sum_{k=1}^\infty \frac{n_k}{10^{k!}} \ \bigg| \ n_k=1,2,\dots,9 \right\}}} = \overline{\overline{\{ 9^k \mid k \in \mathbb{N}^* \}}} = 9^{\aleph_0} = \aleph$$
 
@@ -100,7 +111,8 @@ $$\left| x - \frac{q}{p} \right| = \sum_{k=n+1}^\infty \frac{n_k}{10^{k!}} < \su
 
 $\implies x$ 是刘维尔数.
 
-\vspace{1em}
+\sepline
+
 10.
 (1) 设 $R(x_1, x_2, \dots, x_n) = \sum_{i=1}^n a_i x_i$. 由于 $R(x_1, x_2, \dots, x_n)$ 对称， $\forall 1 \le i < j \le n$，有：
 $$R(x_1, \dots, x_i, \dots, x_j, \dots, x_n) = R(x_1, \dots, x_j, \dots, x_i, \dots, x_n)$$
@@ -130,7 +142,7 @@ $2^\circ$ 假设对 $<n$ 元时 $\forall d \in \mathbb{N}^*$ 成立，$ < d$ 次
 
 令 $G(x_1, x_2, \dots, x_{n-1}) = F(x_1, \dots, x_{n-1}, 0)$，则 $G \in P_{n-1,d}$. 由归纳假设 (1)，$\exists S$ s.t. $G(x_1, \dots, x_{n-1}) = S(\sigma_{n-1,1}, \dots, \sigma_{n-1,n-1})$ 
 
-令 $H(x_1, \dots, x_n) = F(x_1, \dots, x_n) - S(\sigma_{n,1}, \sigma_{n,2}, \dots, \sigma_{n,n-1})$，易知 $\sigma_{n,i}(x_1, \dots, x_{n-1}, 0) = \sigma_{n-1,i}(x_1, \dots, x_{n-1})$$\implies H(x_1, \dots, x_{n-1}, 0) = G(x_1, \dots, x_{n-1}) - S(\sigma_{n-1,1}, \dots, \sigma_{n-1,n-1}) = 0$. 
+令 $H(x_1, \dots, x_n) = F(x_1, \dots, x_n) - S(\sigma_{n,1}, \sigma_{n,2}, \dots, \sigma_{n,n-1})$，易知 $\sigma_{n,i}(x_1, \dots, x_{n-1}, 0) = \sigma_{n-1,i}(x_1, \dots, x_{n-1})$，所以$ H(x_1, \dots, x_{n-1}, 0) = G(x_1, \dots, x_{n-1}) - S(\sigma_{n-1,1}, \dots, \sigma_{n-1,n-1}) = 0$. 
 由因式定理，$H(x_1, \dots, x_n) = x_n H_1(x_1, \dots, x_n)$. 
 
 由于 $F$，$S$ 及 $\sigma_{n,i}$ 都是 $n$ 元对称的，$H$ 也是 $n$ 元对称的$\implies H(x_1, \dots, x_n) = x_1 x_2 \dots x_n H_0(x_1, \dots, x_n) = \sigma_{n,n} H_0(x_1, \dots, x_n)$.
@@ -140,7 +152,8 @@ $2^\circ$ 假设对 $<n$ 元时 $\forall d \in \mathbb{N}^*$ 成立，$ < d$ 次
 
 综上，结合韦达定理知 $\sigma_{n,i} \in \mathbb{Q}$，原命题得证
 
-\vspace{1em}
+\sepline
+
 11.
 (1) 
 \begin{align*}
@@ -149,9 +162,9 @@ $2^\circ$ 假设对 $<n$ 元时 $\forall d \in \mathbb{N}^*$ 成立，$ < d$ 次
 \end{align*}
 
 设 $P(x) = a_m x^m + a_{m-1} x^{m-1} + \dots + a_0$，则 $R(x) = \prod_{j=1}^n \left( a_m (x - y_j)^m + a_{m-1} (x - y_j)^{m-1} + \dots + a_0 \right)$ \\
-其中 $x^k$ 的系数 $T_k$ 为关于 $y_1, \dots, y_n$ 的对称多项式，且系数均为 $a_1, \dots, a_m$ 的和、差、积，因而为有理数。
+其中 $x^k$ 的系数 $T_k$ 为关于 $y_1, \dots, y_n$ 的对称多项式，且系数均为 $a_1, \dots, a_m$ 的和、差、积，因而为有理数. 
 
-又 $y_1, \dots, y_n$ 是 $Q(x)$ 的零点，由 10(3)，$T_k \in \mathbb{Q}$。即 $R(x)$ 为有理系数多项式。
+又 $y_1, \dots, y_n$ 是 $Q(x)$ 的零点，由 10(3)，$T_k \in \mathbb{Q}$. 即 $R(x)$ 为有理系数多项式. 
 
 (2)
 \begin{align*}
@@ -160,20 +173,22 @@ $2^\circ$ 假设对 $<n$ 元时 $\forall d \in \mathbb{N}^*$ 成立，$ < d$ 次
     &= \prod_{j=1}^n ( a_m x^m + a_{m-1} y_j x^{m-1} + \dots + a_0 y_j^m )
 \end{align*}
 
-与 (1) 同理可得 $S(x)$ 为有理系数多项式。
+与 (1) 同理可得 $S(x)$ 为有理系数多项式. 
 
-\vspace{1em}
+\sepline
+
 12.
 \textcolor{magenta}{前面证过了！}
 
-\vspace{1em}
+\sepline
+
 13.
 $\Leftarrow)$ 设 $x_0, y_0$ 是有理系数多项式 $P(x), Q(x)$ 的零点.$Q(x) = (x-y_1)(x-y_2)\dots(x-y_n)(x-y_0) \quad I(x) = x^2+1 = (x+i)(x-i)$
 
-由 11(2) $S(x) = (x-y_1 i)\cdots(x-y_n i)(x-y_0 i)(x+y_1 i)\cdots(x+y_n i)(x+y_0 i)$也是有理系数多项式，而 $y_0 i$ 是其零点 $\implies y_0 i$ 是代数数，进而由 11(1) 可知 $x_0 + y_0 i$ 为代数数。
+由 11(2) $S(x) = (x-y_1 i)\cdots(x-y_n i)(x-y_0 i)(x+y_1 i)\cdots(x+y_n i)(x+y_0 i)$也是有理系数多项式，而 $y_0 i$ 是其零点 $\implies y_0 i$ 是代数数，进而由 11(1) 可知 $x_0 + y_0 i$ 为代数数. 
 
 $\Rightarrow)$ 设 $z_0 = x_0 + y_0 i$ 是代数数，则存在有理系数多项式 $P(x)$
 $$P(z_0) = 0 \implies P(\bar{z}_0) = \overline{P(z_0)} = 0$$
 
-$x_0 = \frac{z_0 + \bar{z}_0}{2}, \ y_0 = \frac{z_0 - \bar{z}_0}{2i}$，由 11(1)(2)，$x_0, y_0$ 是代数数。
+$x_0 = \frac{z_0 + \bar{z}_0}{2}, \ y_0 = \frac{z_0 - \bar{z}_0}{2i}$，由 11(1)(2)，$x_0, y_0$ 是代数数. 
 

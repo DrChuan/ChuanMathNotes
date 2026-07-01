@@ -1,0 +1,271 @@
+
+
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{chuan_math}
+\usetikzlibrary{trees, positioning, shapes.multipart, arrows.meta, decorations.pathreplacing}
+
+\begin{document}
+\begin{tikzpicture}[
+    ->, >=Stealth, shorten >=1pt, auto, node distance=2.5cm,
+    state/.style={circle, draw, minimum size=1.2cm, fill=blue!5, font=\large, thick}
+]
+
+% 画出所有的状态节点排成一排
+\node[state] (p_m2) {$p_{-2}$};
+\node[state, right=of p_m2] (p_m1) {$p_{-1}$};
+\node[state, right=of p_m1] (p) {$p$};
+\node[state, right=of p] (p_1) {$p_1$};
+\node[state, right=of p_1] (p_2) {$p_2$};
+\node[state, right=of p_2] (p_3) {$p_3$};
+
+% ===== 添加转移路线和概率 =====
+
+% 从起点 p 出发：抛出奇数去 p_1，抛出偶数去 p_{-1}
+\path (p) edge [above] node {$\frac{2}{3}$} (p_1)
+      (p) edge [above] node {$\frac{1}{3}$} (p_m1);
+
+% 从 p_1 出发：再来奇数去 p_2，遇偶数断了连击，退回 p_{-1}
+\path (p_1) edge [above] node {$\frac{2}{3}$} (p_2)
+      (p_1) edge [bend left=40, below] node {$\frac{1}{3}$} (p_m1);
+
+% 从 p_2 出发：再来奇数成功通关去 p_3，遇偶数断了连击，直接退回 p_{-1}
+\path (p_2) edge [above] node {$\frac{2}{3}$} (p_3)
+      (p_2) edge [bend left=55, below] node {$\frac{1}{3}$} (p_m1);
+
+% 从 p_{-1} 出发：抛出偶数彻底失败去 p_{-2}，抛出奇数重新积累连击去 p_1
+\path (p_m1) edge [above] node {$\frac{1}{3}$} (p_m2)
+      (p_m1) edge [bend left=40, above] node {$\frac{2}{3}$} (p_1);
+
+% ===== 添加一些直观的中文注释 =====
+\node[below=0.2cm of p_m2, font=\small, text=red] {吸收态-失败 ($p_{-2}=0$)};
+\node[below=0.2cm of p_3, font=\small, text=green!60!black] {吸收态-成功 ($p_3=1$)};
+\node[below=0.2cm of p, font=\small, text=blue] {初始状态};
+
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[
+    block node/.style={rectangle, draw=blue!60, fill=blue!5, thick, rounded corners, align=center, inner sep=6pt, minimum height=1.2cm}
+]
+
+% 情况 (i)
+
+\node[block node] (c1_b1) at (3.5,0) {OE/OOE};
+\node[block node, right=0.3cm of c1_b1] (c1_b2) {OE/OOE};
+\node[draw=none, fill=none, right=0.3cm of c1_b2, font=\large] (c1_dots) {$\cdots$};
+\node[block node, right=0.3cm of c1_dots] (c1_bk) {OE/OOE};
+\node[rectangle, draw=red!60, fill=red!5, thick, rounded corners, right=0.5cm of c1_bk, minimum height=1.2cm, align=center] (c1_end) {E\\(结尾)};
+
+\draw[thick, decorate, decoration={brace, amplitude=6pt, mirror}]
+    (c1_b1.south west) -- (c1_bk.south east) node[midway, below=10pt, font=\small] {$n$ 个 ($n \ge 1$) };
+
+% 情况 (ii)
+
+\node[rectangle, draw=red!60, fill=red!5, thick, rounded corners, minimum height=1.2cm, align=center] (c2_start) at (3.5,-3) {E\\(开头)};
+\node[block node, right=0.5cm of c2_start] (c2_b1) {OE/OOE};
+\node[draw=none, fill=none, right=0.3cm of c2_b1, font=\large] (c2_dots) {$\cdots$};
+\node[block node, right=0.3cm of c2_dots] (c2_bk) {OE/OOE};
+\node[rectangle, draw=red!60, fill=red!5, thick, rounded corners, right=0.5cm of c2_bk, minimum height=1.2cm, align=center] (c2_end) {E\\(结尾)};
+
+\draw[thick, decorate, decoration={brace, amplitude=6pt, mirror}]
+    (c2_b1.south west) -- (c2_bk.south east) node[midway, below=10pt, font=\small] {$n$ 个 ($n \ge 0$) };
+
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[
+    >=Stealth,
+    box/.style={rectangle, draw=blue!60, fill=blue!5, thick, rounded corners, align=center, inner sep=8pt},
+    success/.style={rectangle, draw=green!60!black, fill=green!5, thick, rounded corners, align=center, inner sep=8pt},
+    fail/.style={rectangle, draw=red!60, fill=red!5, thick, rounded corners, align=center, inner sep=8pt},
+    prob/.style={font=\footnotesize, text=red!80!black, fill=white, inner sep=2pt, rounded corners}
+]
+
+% ================= 阶段 2 (图片里先讨论的是阶段2，我们放上面) =================
+\node[font=\large\bfseries, right] at (0, 0) {2};
+
+% 起点
+\node[box] (s1) at (1, -4) {$S_1$};
+
+% 走第一步
+\node[box] (odd1) at (4, -2) {2奇};
+\node[box] (even1) at (4, -6) {1偶};
+\draw[->, thick] (s1) -- (odd1) node[midway, above left, prob] {2/3};
+\draw[->, thick] (s1) -- (even1) node[midway, below left, prob] {1/3};
+
+% 从“奇”出发走第二步
+\node[success] (case1) at (7, -1) {3奇\\（\textbf{成功}）};
+\node[box] (case2_mid) at (7, -3) {1偶};
+\node[box] (case2_end) at (10, -3) {$S_1$};
+
+\draw[->, thick] (odd1) -- (case1) node[midway, above left, prob] {2/3};
+\draw[->, thick] (odd1) -- (case2_mid) node[midway, below left, prob] {1/3};
+\draw[->, thick] (case2_mid) -- (case2_end) node[midway, above, prob] {2/3};
+
+% 从“偶”出发走第二步
+\node[box] (case3) at (7, -5) {$S_1$};
+\node[fail] (case4) at (7, -7) {2偶\\（\textbf{失败}）};
+
+\draw[->, thick] (even1) -- (case3) node[midway, above left, prob] {2/3};
+\draw[->, thick] (even1) -- (case4) node[midway, below left, prob] {1/3};
+
+% 添加公式对应注释
+\node[right=0.2cm of case1, font=\small, text=blue] {$\frac{4}{9}$};
+\node[right=0.2cm of case2_end, font=\small, text=blue] {$\frac{4}{27} p_1$};
+\node[right=0.2cm of case3, font=\small, text=blue] {$\frac{2}{9} p_1$};
+
+
+% ================= 阶段 1 =================
+\node[font=\large\bfseries, right] at (0, -9.5) {1};
+
+\node[box] (start) at (1, -11.5) {初始状态};
+
+\node[box] (path1) at (4.5, -10.5) {\textbf{ $S_1$}};
+\node[box] (path2_mid) at (4.5, -12.5) {偶数};
+\node[box] (path2_end) at (8, -12.5) { \textbf{ $S_1$}};
+
+\draw[->, thick] (start) -- (path1) node[midway, above left, prob] {2/3};
+\draw[->, thick] (start) -- (path2_mid) node[midway, below left, prob] {1/3};
+\draw[->, thick] (path2_mid) -- (path2_end) node[midway, above, prob] {2/3};
+
+% 添加公式对应注释
+\node[right=0.2cm of path1, font=\small, text=blue] {$\frac{2}{3}$};
+\node[right=0.2cm of path2_end, font=\small, text=blue] {$\frac{2}{9}$};
+\node[box] (path2_end) at (9.5, -16.5) { \textbf{ $S_1$}};
+
+\end{tikzpicture}
+
+\begin{tikzpicture}[
+    >=Stealth,
+    box/.style={rectangle, draw=blue!60, fill=blue!5, thick, rounded corners, align=center, inner sep=8pt, minimum width=1.5cm},
+    success/.style={rectangle, draw=green!60!black, fill=green!5, thick, rounded corners, align=center, inner sep=8pt, minimum width=1.5cm},
+    prob/.style={font=\footnotesize, text=red!80!black, fill=white, inner sep=2pt, rounded corners}
+]
+
+% ================= 节点定义 =================
+\node[box] (start) at (0, 0) {初始状态};
+\node[box] (s1) at (4, 0) {\textbf{（首次到达）$S_1$}};
+\node[success] (win) at (7.5, 0) {\textbf{成功}};
+
+% ================= 连线与概率 =================
+% 阶段1：到达S1的两条路
+\draw[->, thick] (start) -- (s1) node[midway, above, prob]{};
+
+% 阶段2：从S1走向成功
+\draw[->, thick] (s1) -- (win) node[midway, above, prob]{};
+
+% ================= 核心结果标注 =================
+\node[below=0.6cm of s1, font=\small, text=blue] {概率合计: $\frac{8}{9}$};
+\node[below=0.6cm of win, font=\small, text=blue] {最终概率: $\frac{8}{9} p_1 = \frac{32}{51}$};
+\node[box] (s1) at (5, -5) {\textbf{$S_1$}};
+
+\end{tikzpicture}
+
+\begin{tikzpicture}[
+    >=Stealth,
+    box/.style={rectangle, draw=blue!60, fill=blue!5, thick, minimum width=1.2cm, minimum height=0.8cm, align=center, rounded corners=2pt},
+    success/.style={rectangle, draw=green!60!black, fill=green!5, thick, minimum width=1.2cm, minimum height=0.8cm, align=center, rounded corners=2pt},
+    fail/.style={rectangle, draw=red!60, fill=red!5, thick, minimum width=1.2cm, minimum height=0.8cm, align=center, rounded corners=2pt},
+    prob/.style={font=\footnotesize, fill=white, inner sep=1pt}
+]
+
+% 1. 放置底部一排的节点
+\node[fail] (fail) {失败};
+\node[box, right=1.5cm of fail] (sm1) {$S_{-1}$};
+\node[box, right=1.5cm of sm1] (s0) {$S_0$};
+\node[box, right=1.5cm of s0] (s1) {$S_1$};
+\node[box, right=1.5cm of s1] (s2) {$S_2$};
+
+% 2. 成功节点放中间偏上 (放在 S0 和 S1 之间正上方)
+\node[success, above=3cm of s0, xshift=1.35cm] (success) {成功}; 
+
+% 3. 底层相邻的水平直线转移
+\draw[->, thick] (sm1) -- (fail) node[midway, above, prob] {1/3};
+\draw[->, thick] (s0) -- (sm1) node[midway, above, prob] {1/3};
+\draw[->, thick] (s0) -- (s1) node[midway, above, prob] {2/3};
+\draw[->, thick] (s1) -- (s2) node[midway, above, prob] {2/3};
+
+% 4. 通向成功的直线转移
+\draw[->, thick] (sm1) -- (success) node[pos=0.4, above left, prob] {$P_{-1}$};
+\draw[->, thick] (s0) -- (success) node[pos=0.6, left=2pt, prob] {$P$};
+\draw[->, thick] (s1) -- (success) node[pos=0.6, right=2pt, prob] {$P_1$};
+\draw[->, thick] (s2) -- (success) node[pos=0.4, above right, prob] {$P_2$};
+
+% 5. 跨越节点的弧线转移 (避开直线，保持清晰)
+% S_{-1} 向右跳跃到 S_1 (走上方弧线，避开底下的 S0)
+\draw[->, thick, bend left=45] (sm1) to node[midway, above, prob] {2/3} (s1);
+
+% S_1 和 S_2 向左退回到 S_{-1} (统一走下方弧线)
+\draw[->, thick, bend left=40] (s1) to node[midway, below, prob] {1/3} (sm1);
+\draw[->, thick, bend left=45] (s2) to node[midway, below, prob] {1/3} (sm1);
+
+\end{tikzpicture}
+
+\begin{tikzpicture}[
+    >=Stealth,
+    % 定义各个框框的样式，完全按照原图配色
+    box/.style={rectangle, draw=blue!40, fill=blue!5, thick, rounded corners=3pt, minimum width=1.5cm, minimum height=0.8cm, align=center},
+    success/.style={box, draw=green!60!black, fill=green!5},
+    fail/.style={box, draw=red!50, fill=red!5},
+    edge_prob/.style={font=\footnotesize, text=red},
+    leaf_val/.style={font=\small, text=blue}
+]
+
+% ================= 第一部分：初始阶段 (原图2) =================
+\node[box] (init) at (0, 0) {初始状态};
+\node[box] (even_init) at (2.5, -1.5) {偶数};
+\node[box] (s1_root) at (5, 0) {$S_1$};
+
+% 初始连线
+\draw[->, thick] (init) -- node[above, edge_prob] {2/3} (s1_root);
+\draw[->, thick] (init) -- node[below left, edge_prob] {1/3} (even_init);
+\draw[->, thick] (even_init) -- node[below right, edge_prob] {2/3} (s1_root);
+
+
+% ================= 第二部分：从S1展开树状图 (原图1) =================
+% --- 节点排布 ---
+% 上半支
+\node[box] (odd2) at (8, 2.5) {2 奇};
+\node[success] (success) at (11, 4) {3 奇\\(成功)};
+\node[box] (even1_high) at (11, 1) {1 偶};
+\node[box] (s1_leaf1) at (14, 1) {$S_1$};
+
+% 下半支
+\node[box] (even1_low) at (8, -2.5) {1 偶};
+\node[box] (s1_leaf2) at (11, -1) {$S_1$};
+\node[fail] (fail) at (11, -4) {2 偶\\(失败)};
+
+% --- 连线 ---
+% S1 展开的两条主路
+\draw[->, thick] (s1_root) -- node[above left, edge_prob] {2/3} (odd2);
+\draw[->, thick] (s1_root) -- node[below left, edge_prob] {1/3} (even1_low);
+
+% 上半支内部连线
+\draw[->, thick] (odd2) -- node[above left, edge_prob] {2/3} (success);
+\draw[->, thick] (odd2) -- node[below left, edge_prob] {1/3} (even1_high);
+\draw[->, thick] (even1_high) -- node[above, edge_prob] {2/3} (s1_leaf1);
+
+% 下半支内部连线
+\draw[->, thick] (even1_low) -- node[above left, edge_prob] {2/3} (s1_leaf2);
+\draw[->, thick] (even1_low) -- node[below left, edge_prob] {1/3} (fail);
+
+% --- 末端蓝色概率标注 ---
+\node[right=0.2cm of success, leaf_val] {$\frac{4}{9}$};
+\node[below=0cm of s1_leaf1, leaf_val] {$\frac{4}{27} p_1$};
+\node[below=0cm of s1_leaf2, leaf_val] {$\frac{2}{9} p_1$};
+\node[box] (tt) at (11, -10) {$S_1$};
+
+
+% ================= 第三部分：循环虚线 =================
+% 改用带有圆角的折线，彻底避开所有中间的节点
+% 上方的线：从顶部抽头，向上走，向左平移，再垂直落回 S1 树根
+\draw[->, dashed, thick, blue!80, rounded corners=12pt] 
+    (s1_leaf1.north) -- (14, 5.5) -- (5, 5.5) -- (s1_root.north);
+
+% 下方的线：从右侧抽头，往右绕，从底部平移，再垂直顶回 S1 树根
+\draw[->, dashed, thick, blue!80, rounded corners=12pt] 
+    (s1_leaf2.east) -- (13, -1) -- (13, -5.5) -- (5, -5.5) -- (s1_root.south);
+
+\end{tikzpicture}
+
+\end{document}

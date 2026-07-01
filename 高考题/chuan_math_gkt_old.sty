@@ -1,0 +1,379 @@
+\ProvidesPackage{chuan_math_gkt}
+
+% ==========================================
+% 1. 基础宏包加载
+% ==========================================
+
+\usepackage{amsmath, amsthm}
+% \usepackage[lining,tabular]{newtxtext}
+% \usepackage{mathptmx}
+\usepackage{mathptmx}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[skins, breakable]{tcolorbox}
+\usepackage{thmtools}
+\usepackage{environ}
+\usepackage{tasks}
+\usepackage{enumitem}
+\usepackage[fontset=none]{ctex}
+
+\setCJKmainfont{SimSun}[
+    Path = ./ ,
+    Extension = .ttf ,
+    UprightFont = * ,
+    BoldFont = * ,
+    AutoFakeBold = true
+]
+\setCJKsansfont{SimHei}[
+    Path = ./ ,
+    Extension = .ttf ,
+    UprightFont = * ,
+    BoldFont = * ,
+    AutoFakeBold = true
+]
+\setCJKfamilyfont{hei}{SimHei}[Path = ./ , Extension = .ttf , AutoFakeBold = false]
+\newcommand{\heiti}{\CJKfamily{hei}}
+\setCJKfamilyfont{kaishu}{SimKai.ttf}[Path = ./ ]
+\newcommand{\kaishu}{\CJKfamily{kaishu}}
+
+\usepackage{sectsty}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{注}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\bfseries\LARGE\centering}
+  {\fontspec{Times New Roman}\thesection}
+  {0.5em}
+  {\heiti}
+
+\titleformat{\chapter}
+  {\heiti\bfseries\huge\centering}
+  {第\zhnum{chapter}章}
+  {0.5em}
+  {}
+
+\everymath{\displaystyle}
+
+% ==========================================
+% 2. 页面与排版全局设置
+% ==========================================
+
+\setstretch{1.65}
+
+\geometry{
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=3cm,
+    bottom=3cm,
+    headheight=15pt
+}
+
+\hypersetup{colorlinks=true, linkcolor=NavyBlue, citecolor=NavyBlue}
+
+% ==========================================
+% 3. 颜色主题定义
+% ==========================================
+
+\colorlet{ThemeBlue}{Cyan!8}
+\colorlet{ThemeRed}{WildStrawberry!8}
+\colorlet{ThemeGray}{black!5}
+
+% ==========================================
+% 4. 大学数学笔记环境
+% ==========================================
+
+\declaretheoremstyle[
+    headfont=\bfseries,
+    bodyfont=\normalfont,
+    headpunct={\ },
+    mdframed={
+        backgroundcolor=ThemeBlue,
+        linecolor=Cyan!30,
+        linewidth=1pt,
+        topline=false, rightline=false, bottomline=false,
+        innertopmargin=6pt, innerbottommargin=6pt
+    }
+]{thmblue}
+
+\declaretheoremstyle[
+    headfont=\bfseries,
+    bodyfont=\normalfont,
+    headpunct={\ },
+    mdframed={
+        backgroundcolor=ThemeRed,
+        linecolor=WildStrawberry!40,
+        linewidth=1pt,
+        topline=false, rightline=false, bottomline=false,
+        innertopmargin=6pt, innerbottommargin=6pt
+    }
+]{thmred}
+
+\declaretheorem[style=thmblue, name={\heiti 定理}, numberwithin=section]{theorem}
+\declaretheorem[style=thmblue, name={\heiti 命题}, numberlike=theorem]{proposition}
+\declaretheorem[style=thmblue, name={\heiti 推论}, numberlike=theorem]{corollary}
+\declaretheorem[style=thmred, name={\heiti 定义}, numberwithin=section]{definition}
+
+\declaretheoremstyle[
+    headfont=\bfseries,
+    bodyfont=\normalfont,
+    headpunct={\ },
+    mdframed={
+        backgroundcolor=ThemeGray,
+        linecolor=black!20,
+        linewidth=2pt,
+        topline=false, rightline=false, bottomline=false,
+        innertopmargin=6pt, innerbottommargin=6pt
+    }
+]{thmgray}
+\declaretheorem[style=thmgray, name={\heiti 例题}, numberwithin=section]{example}
+
+\newtcolorbox{notebox}{
+    blanker,
+    borderline west={3pt}{0pt}{gray!50},
+    left=10pt,
+    top=4pt,
+    bottom=4pt
+}
+
+\definecolor{proofpurple}{HTML}{4A148C}
+
+\makeatletter
+\renewenvironment{proof}[1][证明]{
+    \begin{tcolorbox}[
+        enhanced,
+        breakable,
+        frame hidden,
+        colback=proofpurple!3,
+        sharp corners,
+        boxsep=0pt,
+        left=10pt, right=10pt, top=8pt, bottom=8pt,
+        before skip=12pt, after skip=12pt
+    ]
+    \noindent\textcolor{proofpurple}{\heiti #1：}\ignorespaces
+    \kaishu
+}{
+    \hfill\textcolor{proofpurple}{$\blacksquare$}
+    \end{tcolorbox}
+}
+\makeatother
+
+\newcommand{\sepline}{
+    \par\vspace{1em}
+    \noindent\textcolor{gray!40}{\rule{\textwidth}{0.5pt}}
+    \par\vspace{1em}
+}
+
+\newcommand{\summary}[1]{{\kaishu \textcolor{cyan}{#1}}}
+
+% ==========================================
+% 5. 高中题库专用环境
+% ==========================================
+
+\newcommand{\setdisplay}[1]{\def\displaymode{#1}}
+\setdisplay{2}
+
+\newcounter{exercise}[section]
+\newenvironment{exe}[1][]{%
+    \nopagebreak\par\noindent
+    \refstepcounter{exercise}%
+    {\bfseries \theexercise .}%
+    \ifnum\displaymode>0
+        \setbox0=\hbox{#1}\ifdim\wd0>0pt
+            \hspace{0.3em}{\footnotesize\color{Plum}\textbf{[#1]}}%
+        \fi
+    \fi
+    \hspace{0.5em}\ignorespaces
+}{%
+    \par
+}
+
+\NewEnviron{sol}{
+    \ifnum\displaymode>0
+        \nopagebreak
+        {\small
+            \noindent\textbf{\textcolor{NavyBlue}{【解析】}}\ \BODY\par
+        }
+        \vspace{0.8em}
+    \fi
+}
+
+\NewEnviron{note}{
+    \ifnum\displaymode>1
+        \nopagebreak
+        {\small
+            \noindent\textbf{\textcolor{PineGreen}{【备注】}}\ \BODY\par
+        }
+        \vspace{0.8em}
+    \fi
+}
+
+\settasks{
+    label=\Alph*．︀,
+    label-width=1.5em,
+    item-indent=3.5em,
+    column-sep=1em,
+    after-item-skip=-0.2em,
+    before-skip=-0.9em
+}
+
+% ==========================================
+% 6. 封面辅助命令
+% ==========================================
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\AtBeginDocument{
+    \setlength{\abovedisplayskip}{3pt plus 1pt minus 1pt}
+    \setlength{\belowdisplayskip}{3pt plus 1pt minus 1pt}
+    \setlength{\abovedisplayshortskip}{0pt plus 1pt}
+    \setlength{\belowdisplayshortskip}{3pt plus 1pt minus 1pt}
+}
+
+% ==========================================
+% 7. 高考试卷排版模板
+% ==========================================
+
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
+
+\newcommand{\chuanexamsetup}{%
+  \geometry{left=3.5cm,right=3.5cm,top=4cm,bottom=4cm}%
+  \setlength{\parindent}{2em}%
+  \setlength{\parskip}{0.04em}%
+  \linespread{1.03}\selectfont
+  % 处理含较高行内分式时行与行过近的问题
+  \setlength{\lineskip}{3.5pt}%
+  \setlength{\lineskiplimit}{2pt}%
+  \pagestyle{fancy}%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+  \fancyfoot[C]{\fontsize{10.5pt}{14pt}\selectfont 数学试题第\thepage 页（共\pageref*{LastPage}页）}%
+}
+
+\newcommand{\blank}{\underline{\hspace{3cm}}}
+
+% 题干与选项之间的距离
+\newcommand{\choicevsep}{\vspace{0.2\baselineskip}}
+
+\newcommand{\fourchoices}[4]{%
+  \par\choicevsep
+  \noindent
+  \begin{tabular}{@{}p{0.23\textwidth}p{0.23\textwidth}p{0.23\textwidth}p{0.23\textwidth}@{}}
+    A. #1 & B. #2 & C. #3 & D. #4
+  \end{tabular}
+  \par
+}
+
+\newcommand{\twochoices}[4]{%
+  \par\choicevsep
+  \noindent
+  \begin{tabular}{@{}p{0.47\textwidth}p{0.47\textwidth}@{}}
+    A. #1 & B. #2 \\[0.22em]
+    C. #3 & D. #4
+  \end{tabular}
+  \par
+}
+
+% “绝密★启用前”：按正文五号
+\newcommand{\examsecret}[1]{%
+  \noindent{\heiti\bfseries\fontsize{10.5pt}{14pt}\selectfont #1}\par
+}
+
+% 大标题：三号；“数学”：二号
+\newcommand{\examtitle}[2]{%
+  \vspace{0.18cm}
+  \begin{center}
+    {\fontsize{16pt}{22pt}\selectfont #1\par}
+    \vspace{0.30cm}
+    {\heiti\bfseries\fontsize{22pt}{30pt}\selectfont #2\par}
+  \end{center}
+  \vspace{0.24cm}
+}
+
+\newcommand{\noticetitle}{%
+  \noindent{\heiti\bfseries\fontsize{10.5pt}{16pt}\selectfont 注意事项：}\par
+  \vspace{0.02cm}
+}
+
+% 注意事项：不做悬挂，正文五号
+\newcounter{examnoticeitem}
+\newenvironment{examnotice}{%
+  \par
+  \fontsize{10.5pt}{17pt}\selectfont
+  \setcounter{examnoticeitem}{0}
+  \renewcommand{\item}{%
+    \par\refstepcounter{examnoticeitem}%
+    \noindent\hspace{2em}\arabic{examnoticeitem}.\quad\ignorespaces
+  }%
+}{%
+  \par
+}
+
+% 大题标题：五号黑体；从第二行起悬挂到“一、”之后
+% 每个大题标题前留一行空行：
+% 1. 注意事项与第一大题之间留一行；
+% 2. 相邻两大题之间留一行. 
+\newcommand{\examsection}[1]{%
+  \par\addvspace{\baselineskip}%
+  \noindent
+  \hangindent=2em
+  \hangafter=1
+  {\heiti\bfseries\fontsize{10.5pt}{17pt}\selectfont #1}\par
+  \vspace{0.04cm}
+}
+
+\newenvironment{tightcenter}{%
+  \par\centering
+}{%
+  \par
+}
+
+% 正文：五号
+\newcommand{\examfontsize}{%
+  \fontsize{10.5pt}{17pt}\selectfont
+}
+
+% 选择题、填空题列表
+\newenvironment{examquestions}[1][]{%
+  \begin{enumerate}[
+    label=\arabic*.,
+    leftmargin=2.1em,
+    itemsep=0.42em,
+    topsep=0pt,
+    parsep=0pt,
+    partopsep=0pt,
+    #1
+  ]
+}{%
+  \end{enumerate}
+}
+
+% 解答题列表：解答题与解答题之间留两个空行
+\newenvironment{examanswers}[1][]{%
+  \begin{enumerate}[
+    label=\arabic*.,
+    leftmargin=2.1em,
+    itemsep=2\baselineskip,
+    topsep=0pt,
+    parsep=0pt,
+    partopsep=0pt,
+    #1
+  ]
+}{%
+  \end{enumerate}
+}

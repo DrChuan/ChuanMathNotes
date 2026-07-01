@@ -1,0 +1,69 @@
+\section*{习题2}
+\addcontentsline{toc}{section}{习题2}
+
+1. 分正反 2 个方向证明. 讨论 $0 < x < 1$ 即可.
+
+$1^\circ \ p$ 进制下的有限小数或循环小数必为有理数
+
+(i) 有限小数. 设 $x = (0.a_1 a_2 \dots a_n)_p = \sum_{k=1}^n a_k p^{-k}$
+
+为 $n$ 个有理数相加，由封闭性， $x \in \mathbb{Q}$.
+
+(ii) 循环小数. 设 $x = (0.a_1 a_2 \dots a_m \dot{a}_{m+1} \dots \dot{a}_{m+n})$
+\begin{align*}
+    &= \sup_N \left( \sum_{k=1}^m a_k p^{-k} + \sum_{l=0}^N \sum_{k=1}^n a_{m+nl+k} p^{-(m+nl+k)} \right) \\
+    &= p^{-m} \sum_{l=0}^N \left( p^{-nl} \sum_{k=1}^n a_{m+k} p^{-k} \right) \\
+    &= p^{-m} \left( \sum_{k=1}^n a_{m+k} p^{-k} \right) \cdot \left( \sum_{l=0}^N p^{-nl} \right) \\
+    &= p^{-m} \left( \sum_{k=1}^n a_{m+k} p^{-k} \right) \cdot \frac{1 - p^{-n(N+1)}}{1 - p^{-n}}
+\end{align*}
+
+所以 $x = \sum_{k=1}^m a_k p^{-k} + \frac{p^{-m}}{1 - p^{-n}} \sum_{k=1}^n a_{m+k} p^{-k}$
+
+为有限个有理数四则运算 $\implies x \in \mathbb{Q}$
+
+$2^\circ \ $有理数必能写成有限小数或循环小数
+
+$\forall b > a \ (a, b \in \mathbb{N}^*)$ 令 $a_1 = \left[\frac{pa}{b}\right]$, $r_1 = pa - \left[\frac{pa}{b}\right]b = pa - a_1 b$
+
+$$
+\begin{cases}
+0 \le a_1 < p \\
+pa - b < \left[\frac{pa}{b}\right]b \le pa \implies 0 \le r_1 < b
+\end{cases}
+$$
+
+若 $r_1 = 0$, 则 $\frac{a}{b} = \frac{a_1}{p} = (0.a_1)_p$
+
+否则，令 $a_2 = \left[\frac{pr_1}{b}\right]$, $r_2 = pr_1 - \left[\frac{pr_1}{b}\right]b = pr_1 - a_2 b$
+
+$$
+\begin{cases}
+0 \le a_2 < p \\
+0 \le r_2 < b
+\end{cases}
+$$
+
+若 $r_2 = 0$, 则 $\frac{a}{b} = \frac{a_1}{p} + \frac{a_2}{p^2} = (0.a_1 a_2)_p$
+
+不断重复上述过程，有 2 种情况：
+
+(i) $\exists n \in \mathbb{N}^*$ s.t. $r_n = 0$，此时 $\frac{a}{b} = \sum_{k=1}^n a_k p^{-k}$ 为有限小数
+
+(ii) 反之，可得 $a_1, a_2, \dots$ 和 $r_1, r_2, \dots$
+
+此时 $\forall k \in \mathbb{N}^*$, 考虑 $r_k, r_{k+1}, \dots, r_{k+b}$ 这 $b+1$ 个数.
+
+由于 $r_i \in \{0, 1, \dots, b-1\} \ (\forall i \in \mathbb{N}^*)$
+
+由抽屉原理，$\exists k \le i < j \le k+b$ s.t. $r_i = r_j$
+
+$\implies a_{i+1} = a_{j+1}$. 设 $i_0, j_0$ 为满足上式的最小的 $i, j$
+
+则 $\forall k > i_0$, 有 $a_k = a_{k+j_0-i_0}$.
+
+\begin{align*}
+    \implies \frac{a}{b} &= \sum_{k=1}^{i_0} a_k p^{-k} + \sup_N \sum_{l=0}^N \sum_{k=1}^{j_0-i_0} a_{i_0+k} p^{-(i_0 + l(j_0-i_0) + k)} \\
+    &= (0.a_1 a_2 \dots a_{i_0} \dot{a}_{i_0+1} \dots \dot{a}_{j_0})_p
+\end{align*}
+
+结合 $1^\circ, 2^\circ$, 命题得证.

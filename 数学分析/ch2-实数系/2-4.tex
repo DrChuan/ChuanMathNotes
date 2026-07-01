@@ -1,63 +1,282 @@
-\section{4}
+\section{实数系一些概念和问题}
+
+\subsection*{实数的十进制表示}
+
+对任意 $x \in \mathbb{R}$，$x \ge 0$，令 $m=[x]$. 原图记
+\[
+a_k=[10^k x]-[10^{k-1}x],
+\]
+并称其为“第 $k$ 位小数”. 此时
+\[
+x=\sup_{k \ge 1}\left(m+\sum_{i=1}^k \frac{a_i}{10^i}\right),
+\]
+记作
+\[
+x=m.a_1a_2\cdots a_k\cdots,
+\qquad
+-x=-m.a_1a_2\cdots a_k\cdots.
+\]
+
+\begin{notebox}
+这里 $a_k$ 的定义按原图字面照录；但从通常十进制展开的写法看，式中疑似缺少一个系数 $10$. 由于原图未进一步说明，这里只做标注，不擅自改写. 
+\end{notebox}
+
+\subsection*{实数的 $p$ 进制表示}
+
+原图进一步写到：对任意 $x \in \mathbb{R}$，$x \ge 0$，
+
+当 $x \le 1$ 时，$N:=0$；当 $x>1$ 时，取 $N \in \mathbb{N}^*$ 使
+\[
+p^{N-1}<x<p^N.
+\]
+
+随后定义
+\[
+a_k=[p^{k-N}x]-[p^{k-1-N}x],
+\]
+并写出
+\[
+x=\sup_{n \to \infty}\sum_{k=-n}^{N} a_k p^k.
+\]
+
+记作
+\[
+x=a_Na_{N-1}\cdots a_0.a_{-1}a_{-2}\cdots \quad (\text{底 } p).
+\]
+
+\begin{notebox}
+这一段中量词、下标范围和系数位置都较紧，已按可辨内容整理；其中 $a_k$ 的定义同样疑似缺少一个系数 $p$. 
+\end{notebox}
+
+\subsection*{定义 $n$ 次方根}
 
 \begin{theorem}[n次方根的存在唯一性]
-    设 $a > 0$，$n \in \mathbb{N}^*$，则方程 $x^n = a$ 有唯一正解。
+设 $a > 0$，$n \in \mathbb{N}^*$，则方程 $x^n = a$ 有唯一正解. 
 \end{theorem}
 
 \begin{proof}
+$1^\circ$ （证明唯一性）
 
-$1^\circ$ （证明 $x_0$ 唯一）
-已知 $s > t > 0 \implies s^n > t^n$。因此，若 $x_0^n = a$：
-$$
+若 $s>t>0$，则 $s^n>t^n$. 因此若 $x_0^n=a$，则
+\[
 \begin{cases}
-x' > x_0 \implies x'^n > x_0^n = a \\
-x' < x_0 \implies x'^n < x_0^n = a
+x'>x_0 \implies x'^n>x_0^n=a,\\
+x'<x_0 \implies x'^n<x_0^n=a.
 \end{cases}
-\implies x_0 \text{ 唯一。}
-$$
+\]
+故 $x_0$ 唯一. 
 
-$2^\circ$ （证明 $x_0$ 存在）
-构造集合 $E_a := \{ y \mid y > 0, y^n \le a \}$。
+$2^\circ$ （证明存在性）
 
-(i) （证明 $E_a$ 非空且有上界）
-令 $s < 1$ 且 $s < a$，则 $s^n < s < a \implies s \in E_a$，即 $E_a$ 非空。
-若 $y \ge 1+a > 1$，则 $y^n \ge (1+a)^n > 1+a > a \implies y \notin E_a$。
-这说明 $1+a$ 是 $E_a$ 的一个上界。令 $x = \sup E_a$。
+构造
+\[
+E_a:=\{y \mid y>0,\ y^n\le a\}.
+\]
 
-(ii) （证明 $x^n = a$）
-(1)若 $x^n > a$ （构造 $\varepsilon$ 使得 $(x-\varepsilon)^n \ge a \implies x-\varepsilon$ 也是上界）
-令 $\varepsilon = \frac{x^n - a}{(x+1)^n} \in (0, 1)$，则：
-$$
+(i) 证明 $E_a$ 非空且有上界. 
+
+取 $s<1$ 且 $s<a$，则 $s^n<s<a$，故 $s \in E_a$，于是 $E_a \ne \varnothing$. 
+
+若 $y \ge 1+a > 1$，则 $y^n \ge (1+a)^n > 1+a > a$，故 $y \notin E_a$. 
+所以 $1+a$ 是 $E_a$ 的一个上界. 令
+\[
+x=\sup E_a.
+\]
+
+(ii) 证明 $x^n=a$. 
+
+若 $x^n>a$，令
+\[
+\varepsilon=\frac{x^n-a}{(x+1)^n}\in(0,1),
+\]
+则
+\[
 \begin{aligned}
-(x-\varepsilon)^n &= x^n + \sum_{k=1}^n C_n^k x^{n-k} (-\varepsilon)^k \\
-&> x^n - \sum_{k=1}^n C_n^k x^{n-k} \varepsilon^k \\
-&> x^n - \varepsilon \sum_{k=1}^n C_n^k x^{n-k} \\
-&= x^n - \varepsilon ((x+1)^n - x^n) \\
-&> x^n - \varepsilon (x+1)^n \\
-&= x^n - (x^n - a) = a
+(x-\varepsilon)^n
+&=x^n+\sum_{k=1}^n \binom{n}{k}x^{n-k}(-\varepsilon)^k \\
+&>x^n-\sum_{k=1}^n \binom{n}{k}x^{n-k}\varepsilon^k \\
+&>x^n-\varepsilon \sum_{k=1}^n \binom{n}{k}x^{n-k} \\
+&=x^n-\varepsilon\big((x+1)^n-x^n\big) \\
+&>x^n-\varepsilon(x+1)^n \\
+&=x^n-(x^n-a)=a.
 \end{aligned}
-$$
-$\implies x-\varepsilon$ 是 $E_a$ 的上界，与 $x$ 为上确界矛盾。
+\]
+于是 $x-\varepsilon$ 也是 $E_a$ 的上界，这与 $x$ 为上确界矛盾. 
 
-(2)若 $x^n < a$ （构造 $\varepsilon$ 使得 $(x+\varepsilon)^n < a \implies x$ 不是上界）
-令 
-$$
-\varepsilon = \begin{cases}
-\frac{a - x^n}{(x+1)^n}, & \frac{a - x^n}{(x+1)^n} < 1 \\
-1, & \text{others}
+若 $x^n<a$，令
+\[
+\varepsilon=
+\begin{cases}
+\dfrac{a-x^n}{(x+1)^n}, & \dfrac{a-x^n}{(x+1)^n}<1,\\[0.4em]
+1, & \text{others},
 \end{cases}
-$$
-此时 $\varepsilon \in (0, 1]$。则：
-$$
+\qquad \varepsilon \in (0,1].
+\]
+则
+\[
 \begin{aligned}
-(x+\varepsilon)^n &= x^n + \sum_{k=1}^n C_n^k x^{n-k} \varepsilon^k \\
-&\le x^n + \varepsilon \sum_{k=1}^n C_n^k x^{n-k} \\
-&= x^n + \varepsilon ((x+1)^n - x^n) \\
-&< x^n + \varepsilon (x+1)^n \\
-&\le x^n + a - x^n = a
+(x+\varepsilon)^n
+&=x^n+\sum_{k=1}^n \binom{n}{k}x^{n-k}\varepsilon^k \\
+&\le x^n+\varepsilon \sum_{k=1}^n \binom{n}{k}x^{n-k} \\
+&<x^n+\varepsilon\big((x+1)^n-x^n\big) \\
+&<x^n+\varepsilon(x+1)^n \\
+&\le x^n+(a-x^n)=a.
 \end{aligned}
-$$
-$\implies x+\varepsilon \in E_a$，与 $x$ 为上界矛盾。
+\]
+故 $x+\varepsilon \in E_a$，与 $x$ 为上界矛盾. 
 
-综上，$x^n = a$，即 $x$ 为 $x^n = a$ 的唯一正数解。
+综上，$x^n=a$，故 $x$ 为方程 $x^n=a$ 的唯一正解. 
 \end{proof}
+
+定义 $a^{1/n}$ 为 $a$ 的 $n$ 次方根. 
+
+\begin{theorem}[均值不等式]
+设 $n \ge 2$，$a_1,a_2,\dots,a_n \ge 0$，则
+\[
+\sqrt[n]{\prod_{k=1}^n a_k}\le \frac{1}{n}\sum_{k=1}^n a_k.
+\]
+\end{theorem}
+
+\begin{proof}
+用数学归纳法证明. 
+
+$1^\circ$ 当 $n=2$ 时，
+\[
+(\sqrt{a_1}-\sqrt{a_2})^2 \ge 0
+\implies a_1+a_2 \ge 2\sqrt{a_1a_2}.
+\]
+
+$2^\circ$ 先证当 $n=2^k$ 时成立. 
+
+设命题对 $n=2^k$ 成立，记 $m=2^k$，则
+\[
+\sqrt[m]{\prod_{i=1}^m a_i}\le \frac{1}{m}\sum_{i=1}^m a_i.
+\]
+当 $n=2^{k+1}=2m$ 时，
+\[
+\begin{aligned}
+\sqrt[2m]{\prod_{i=1}^{2m} a_i}
+&=\sqrt[m]{\prod_{i=1}^m \sqrt{a_i a_{i+m}}} \\
+&\le \frac{1}{m}\sum_{i=1}^m \sqrt{a_i a_{i+m}} \\
+&\le \frac{1}{m}\sum_{i=1}^m \frac{a_i+a_{i+m}}{2} \\
+&=\frac{1}{2m}\sum_{i=1}^{2m} a_i.
+\end{aligned}
+\]
+故对一切 $n=2^k$ 命题成立. 
+
+$3^\circ$ 再证对一切 $n \ge 2$ 成立. 
+
+设 $2^k \le n < 2^{k+1}$，记 $m=2^k$，则 $m \le n < 2m$. 令
+\[
+A=\frac{1}{n}\sum_{i=1}^n a_i.
+\]
+由 $2m$ 个数的情形可得
+\[
+\sqrt[2m]{\left(\prod_{i=1}^n a_i\right)A^{2m-n}}
+\le \frac{1}{2m}\bigl(nA+(2m-n)A\bigr)=A.
+\]
+因此
+\[
+\left(\prod_{i=1}^n a_i\right)A^{2m-n}\le A^{2m}
+\implies \prod_{i=1}^n a_i \le A^n,
+\]
+从而
+\[
+\sqrt[n]{\prod_{i=1}^n a_i}\le A=\frac{1}{n}\sum_{i=1}^n a_i.
+\]
+
+综上，命题得证. 
+\end{proof}
+
+\begin{theorem}[Young 不等式]
+设 $p,q \in (1,+\infty)$ 且
+\[
+\frac{1}{p}+\frac{1}{q}=1.
+\]
+则对任意 $a,b>0$，有
+\[
+ab\le \frac{1}{p}a^p+\frac{1}{q}b^q.
+\]
+\end{theorem}
+
+\begin{proof}
+原图先将不等式化为
+\[
+1\le \frac{1}{p}a^{p-1}b^{-1}+\frac{1}{q}a^{-1}b^{q-1}.
+\]
+
+注意到
+\[
+\left(a^{p-1}b^{-1}\right)^{1/p}\left(a^{-1}b^{q-1}\right)^{1/q}
+=a^{1-\frac{1}{p}-\frac{1}{q}}b^{-1+\frac{q-1}{q}}
+=1.
+\]
+
+令
+\[
+A=\left(a^{p-1}b^{-1}\right)^{1/p},
+\]
+则
+\[
+a^{-1}b^{q-1}=\frac{1}{A^q}.
+\]
+所以只需证明
+\[
+1\le \frac{1}{p}A^p+\frac{1}{q}\frac{1}{A^q}.
+\]
+
+由对称性，不妨设 $A \ge 1$. 任取整数 $m>p$，令
+\[
+k=\left\lfloor \frac{m}{p}\right\rfloor+1.
+\]
+则
+\[
+k-1\le \frac{m}{p}<k
+\implies
+\frac{1}{p}\le \frac{k}{m}\le \frac{1}{p}+\frac{1}{m}.
+\]
+于是
+\[
+A^{m/k}\le A^p,\qquad \frac{1}{A^{m/(m-k)}}\le \frac{1}{A^q}.
+\]
+故
+\[
+\begin{aligned}
+\frac{1}{p}A^p+\frac{1}{q}\frac{1}{A^q}
+&\ge \frac{k}{m}A^{m/k}+\left(1-\frac{k}{m}\right)\frac{1}{A^{m/(m-k)}}-\frac{1}{m}A^p \\
+&=\frac{1}{m}\left(kA^{m/k}+(m-k)\frac{1}{A^{m/(m-k)}}\right)-\frac{1}{m}A^p \\
+&\ge \sqrt[m]{A^m\cdot A^{-m}}-\frac{1}{m}A^p \\
+&=1-\frac{1}{m}A^p.
+\end{aligned}
+\]
+
+令
+\[
+S=\frac{1}{p}A^p+\frac{1}{q}\frac{1}{A^q}-1.
+\]
+则对任意整数 $m>p$，都有
+\[
+S\ge -\frac{1}{m}A^p.
+\]
+令 $m \to \infty$，得 $S \ge 0$，从而
+\[
+1\le \frac{1}{p}A^p+\frac{1}{q}\frac{1}{A^q}.
+\]
+于是
+\[
+ab\le \frac{1}{p}a^p+\frac{1}{q}b^q.
+\]
+\end{proof}
+
+\begin{theorem}
+设 $x \ge 0$，则
+\[
+(1+x)^\alpha-1\le \alpha x,\qquad \forall \alpha \in (0,1],\ x \ge 0;
+\]
+\[
+(1+x)^\alpha-1\ge \alpha x,\qquad \forall \alpha \ge 1,\ x \ge 0;
+\]
+\[
+(1+x)^\alpha-1\ge \frac{\alpha x}{1+x},\qquad \forall \alpha \ge 0,\ x \ge 0.
+\]
+\end{theorem}

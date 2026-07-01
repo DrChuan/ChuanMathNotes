@@ -1,0 +1,516 @@
+\ProvidesPackage{chuan_math_gkt}
+
+% ==========================================
+% 1. 基础宏包加载
+% ==========================================
+
+\usepackage{amsmath, amsthm}
+% \usepackage[lining,tabular]{newtxtext}
+% \usepackage{mathptmx}
+\usepackage{mathptmx}
+\usepackage{xparse}
+\usepackage{amsfonts}
+\usepackage{wrapfig}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[skins, breakable]{tcolorbox}
+\usepackage{thmtools}
+\usepackage{environ}
+\usepackage{tasks}
+\usepackage{enumitem}
+\usepackage[fontset=none]{ctex}
+
+\setCJKmainfont{SimSun}[
+    Path = ./ ,
+    Extension = .ttf ,
+    UprightFont = * ,
+    BoldFont = * ,
+    AutoFakeBold = true
+]
+\setCJKsansfont{SimHei}[
+    Path = ./ ,
+    Extension = .ttf ,
+    UprightFont = * ,
+    BoldFont = * ,
+    AutoFakeBold = true
+]
+\setCJKfamilyfont{hei}{SimHei}[Path = ./ , Extension = .ttf , AutoFakeBold = false]
+\newcommand{\heiti}{\CJKfamily{hei}}
+\setCJKfamilyfont{kaishu}{SimKai.ttf}[Path = ./ ]
+\newcommand{\kaishu}{\CJKfamily{kaishu}}
+
+\usepackage{sectsty}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{注}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\bfseries\LARGE\centering}
+  {\fontspec{Times New Roman}\thesection}
+  {0.5em}
+  {\heiti}
+
+\titleformat{\chapter}
+  {\heiti\bfseries\huge\centering}
+  {第\zhnum{chapter}章}
+  {0.5em}
+  {}
+
+\everymath{\displaystyle}
+
+% ==========================================
+% 2. 页面与排版全局设置
+% ==========================================
+
+\setstretch{1.65}
+
+\geometry{
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=3cm,
+    bottom=3cm,
+    headheight=15pt
+}
+
+\hypersetup{colorlinks=true, linkcolor=NavyBlue, citecolor=NavyBlue}
+
+% ==========================================
+% 3. 颜色主题定义
+% ==========================================
+
+\colorlet{ThemeBlue}{Cyan!8}
+\colorlet{ThemeRed}{WildStrawberry!8}
+\colorlet{ThemeGray}{black!5}
+
+% ==========================================
+% 4. 大学数学笔记环境
+% ==========================================
+
+\declaretheoremstyle[
+    headfont=\bfseries,
+    bodyfont=\normalfont,
+    headpunct={\ },
+    mdframed={
+        backgroundcolor=ThemeBlue,
+        linecolor=Cyan!30,
+        linewidth=1pt,
+        topline=false, rightline=false, bottomline=false,
+        innertopmargin=6pt, innerbottommargin=6pt
+    }
+]{thmblue}
+
+\declaretheoremstyle[
+    headfont=\bfseries,
+    bodyfont=\normalfont,
+    headpunct={\ },
+    mdframed={
+        backgroundcolor=ThemeRed,
+        linecolor=WildStrawberry!40,
+        linewidth=1pt,
+        topline=false, rightline=false, bottomline=false,
+        innertopmargin=6pt, innerbottommargin=6pt
+    }
+]{thmred}
+
+\declaretheorem[style=thmblue, name={\heiti 定理}, numberwithin=section]{theorem}
+\declaretheorem[style=thmblue, name={\heiti 命题}, numberlike=theorem]{proposition}
+\declaretheorem[style=thmblue, name={\heiti 推论}, numberlike=theorem]{corollary}
+\declaretheorem[style=thmred, name={\heiti 定义}, numberwithin=section]{definition}
+
+\declaretheoremstyle[
+    headfont=\bfseries,
+    bodyfont=\normalfont,
+    headpunct={\ },
+    mdframed={
+        backgroundcolor=ThemeGray,
+        linecolor=black!20,
+        linewidth=2pt,
+        topline=false, rightline=false, bottomline=false,
+        innertopmargin=6pt, innerbottommargin=6pt
+    }
+]{thmgray}
+\declaretheorem[style=thmgray, name={\heiti 例题}, numberwithin=section]{example}
+
+\newtcolorbox{notebox}{
+    blanker,
+    borderline west={3pt}{0pt}{gray!50},
+    left=10pt,
+    top=4pt,
+    bottom=4pt
+}
+
+\definecolor{proofpurple}{HTML}{4A148C}
+
+\makeatletter
+\renewenvironment{proof}[1][证明]{
+    \begin{tcolorbox}[
+        enhanced,
+        breakable,
+        frame hidden,
+        colback=proofpurple!3,
+        sharp corners,
+        boxsep=0pt,
+        left=10pt, right=10pt, top=8pt, bottom=8pt,
+        before skip=12pt, after skip=12pt
+    ]
+    \noindent\textcolor{proofpurple}{\heiti #1：}\ignorespaces
+    \kaishu
+}{
+    \hfill\textcolor{proofpurple}{$\blacksquare$}
+    \end{tcolorbox}
+}
+\makeatother
+
+\newcommand{\sepline}{
+    \par\vspace{1em}
+    \noindent\textcolor{gray!40}{\rule{\textwidth}{0.5pt}}
+    \par\vspace{1em}
+}
+
+\newcommand{\summary}[1]{{\kaishu \textcolor{cyan}{#1}}}
+
+% ==========================================
+% 5. 高中题库专用环境
+% ==========================================
+
+\newcommand{\setdisplay}[1]{\def\displaymode{#1}}
+\setdisplay{2}
+
+\newcounter{exercise}[section]
+\newenvironment{exe}[1][]{%
+    \nopagebreak\par\noindent
+    \refstepcounter{exercise}%
+    {\bfseries \theexercise .}%
+    \ifnum\displaymode>0
+        \setbox0=\hbox{#1}\ifdim\wd0>0pt
+            \hspace{0.3em}{\footnotesize\color{Plum}\textbf{[#1]}}%
+        \fi
+    \fi
+    \hspace{0.5em}\ignorespaces
+}{%
+    \par
+}
+
+\NewEnviron{sol}{
+    \ifnum\displaymode>0
+        \nopagebreak
+        {\small
+            \noindent\textbf{\textcolor{NavyBlue}{【解析】}}\ \BODY\par
+        }
+        \vspace{0.8em}
+    \fi
+}
+
+\NewEnviron{note}{
+    \ifnum\displaymode>1
+        \nopagebreak
+        {\small
+            \noindent\textbf{\textcolor{PineGreen}{【备注】}}\ \BODY\par
+        }
+        \vspace{0.8em}
+    \fi
+}
+
+\settasks{
+    label=\Alph*．︀,
+    label-width=1.5em,
+    item-indent=3.5em,
+    column-sep=1em,
+    after-item-skip=-0.2em,
+    before-skip=-0.9em
+}
+
+% ==========================================
+% 6. 封面辅助命令
+% ==========================================
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\AtBeginDocument{
+    \setlength{\abovedisplayskip}{3pt plus 1pt minus 1pt}
+    \setlength{\belowdisplayskip}{3pt plus 1pt minus 1pt}
+    \setlength{\abovedisplayshortskip}{0pt plus 1pt}
+    \setlength{\belowdisplayshortskip}{3pt plus 1pt minus 1pt}
+}
+
+% ==========================================
+% 7. 高考试卷排版模板
+% ==========================================
+
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
+
+\newcommand{\chuanexamsetup}{%
+  \geometry{left=3.5cm,right=3.5cm,top=4cm,bottom=4cm}%
+  \setlength{\parindent}{2em}%
+  \setlength{\parskip}{0.04em}%
+  \linespread{1.03}\selectfont
+  % 处理含较高行内分式时行与行过近的问题
+  \setlength{\lineskip}{5pt}%
+  \setlength{\lineskiplimit}{3pt}%
+  \setlength{\extrarowheight}{2pt}%
+  \renewcommand{\arraystretch}{1.35}%
+  \pagestyle{fancy}%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+  \fancyfoot[C]{\fontsize{10.5pt}{14pt}\selectfont 数学试题第\thepage 页（共\pageref*{LastPage} 页）}%
+}
+
+\newcommand{\blank}{\underline{\hspace{1.4cm}}}
+
+% 题干与选项之间的距离：压缩题干--选项、选项--下一题之间的留白
+\newcommand{\choicevsep}{\vspace{-0.2\baselineskip}}
+\newcommand{\choiceaftersep}{\vspace{-0.18\baselineskip}}
+% 选项行专用支架：保证含 \dfrac 的行不压线，同时避免普通选项行过高
+% 默认选项不额外撑高
+\newcommand{\choicecell}[1]{#1}
+
+% 需要时手动撑高：用于含 \dfrac、较高根式、复杂上下标的选项
+\newcommand{\tallchoice}[1]{\rule[-1.2em]{0pt}{3em}#1}
+
+\newcommand{\fourchoices}[4]{%
+  \par\choicevsep
+  \noindent
+  {\setlength{\tabcolsep}{0pt}%
+  \renewcommand{\arraystretch}{1.05}%
+  \begin{tabular}{@{}p{0.23\textwidth}p{0.23\textwidth}p{0.23\textwidth}p{0.23\textwidth}@{}}
+    A. \choicecell{#1} & B. \choicecell{#2} & C. \choicecell{#3} & D. \choicecell{#4}
+  \end{tabular}}%
+  \par\choiceaftersep
+}
+
+\newcommand{\twochoices}[4]{%
+  \par\choicevsep
+  \noindent
+  {\setlength{\tabcolsep}{0pt}%
+  \renewcommand{\arraystretch}{1.05}%
+  \begin{tabular}{@{}p{0.47\textwidth}p{0.47\textwidth}@{}}
+    A. \choicecell{#1} & B. \choicecell{#2} \\[-0.10em]
+    C. \choicecell{#3} & D. \choicecell{#4}
+  \end{tabular}}%
+  \par\choiceaftersep
+}
+
+% 四行选项：一个选项占一行. 把 \twochoices 或 \fourchoices 改成 \onechoices 即可. 
+\newcommand{\onechoices}[4]{%
+  \par\choicevsep
+  \noindent
+  {\setlength{\tabcolsep}{0pt}%
+  \renewcommand{\arraystretch}{1.05}%
+  \begin{tabular}{@{}p{0.96\textwidth}@{}}
+    A. \choicecell{#1} \\[-0.10em]
+    B. \choicecell{#2} \\[-0.10em]
+    C. \choicecell{#3} \\[-0.10em]
+    D. \choicecell{#4}
+  \end{tabular}}%
+  \par\choiceaftersep
+}
+
+% “绝密★启用前”：按正文五号
+\newcommand{\examsecret}[1]{%
+  \noindent{\heiti\bfseries\fontsize{10.5pt}{14pt}\selectfont #1}\par
+}
+
+% 大标题：三号；“数学”：二号
+\newcommand{\examtitle}[2]{%
+  \vspace{0.18cm}
+  \begin{center}
+    {\fontsize{16pt}{22pt}\selectfont #1\par}
+    \vspace{0.30cm}
+    {\heiti\bfseries\fontsize{22pt}{30pt}\selectfont #2\par}
+  \end{center}
+  \vspace{0.24cm}
+}
+
+\newcommand{\noticetitle}{%
+  \noindent{\heiti\bfseries\fontsize{10.5pt}{16pt}\selectfont 注意事项：}\par
+  \vspace{0.02cm}
+}
+
+% 注意事项：不做悬挂，正文五号
+\newcounter{examnoticeitem}
+\newenvironment{examnotice}{%
+  \par
+  \fontsize{10.5pt}{17pt}\selectfont
+  \setcounter{examnoticeitem}{0}
+  \renewcommand{\item}{%
+    \par\refstepcounter{examnoticeitem}%
+    \noindent\hspace{2em}\arabic{examnoticeitem}.\quad\ignorespaces
+  }%
+}{%
+  \par
+}
+
+% 大题标题：五号黑体；从第二行起悬挂到“一、”之后
+% 每个大题标题前留一行空行：
+% 1. 注意事项与第一大题之间留一行；
+% 2. 相邻两大题之间留一行. 
+\newcommand{\examsection}[1]{%
+  \par\addvspace{\baselineskip}%
+  \noindent
+  \hangindent=2em
+  \hangafter=1
+  {\heiti\bfseries\fontsize{10.5pt}{17pt}\selectfont #1}\par
+  \vspace{0.04cm}
+}
+
+\newenvironment{tightcenter}{%
+  \par\centering
+}{%
+  \par
+}
+
+% 正文：五号
+\newcommand{\examfontsize}{%
+  \fontsize{10.5pt}{17pt}\selectfont
+}
+
+% 选择题、填空题列表
+\newenvironment{examquestions}[1][]{%
+  \begin{enumerate}[
+    label=\arabic*.,
+    leftmargin=2.1em,
+    itemsep=0.3em,
+    topsep=0pt,
+    parsep=0pt,
+    partopsep=0pt,
+    #1
+  ]
+}{%
+  \end{enumerate}
+}
+
+% 解答题列表：解答题与解答题之间留两个空行
+\newenvironment{examanswers}[1][]{%
+  \begin{enumerate}[
+    label=\arabic*.,
+    leftmargin=2.1em,
+    itemsep=2\baselineskip,
+    topsep=0pt,
+    parsep=0pt,
+    partopsep=0pt,
+    #1
+  ]
+}{%
+  \end{enumerate}
+}
+
+% 图形选项：用于原卷中 2×2 排列的函数图像选项，保持原图比例. 
+\newcommand{\graphchoices}[4]{%
+  \par\choicevsep
+  \noindent
+  {\renewcommand{\arraystretch}{1.10}%
+  \begin{tabular}{@{}p{0.48\textwidth}p{0.48\textwidth}@{}}
+    A. #1 & B. #2 \\[0.3em]
+    C. #3 & D. #4
+  \end{tabular}}%
+  \par\choiceaftersep
+}
+
+% 右侧环绕图片
+% 用法：\rightwrapfig[宽度][上移量][下方留白]{图片路径}
+\NewDocumentCommand{\rightwrapfig}{O{0.32\linewidth} O{-1.2em} O{-0.5em} m}{%
+  \begin{wrapfigure}{r}{#1}
+    \vspace{#2}
+    \centering
+    \includegraphics[width=\linewidth]{#4}
+    \vspace{#3}
+  \end{wrapfigure}
+}
+
+% 题干中的不等式组 / 方程组，局部压缩行距
+% 用法：\linsys{第一行\\ 第二行\\ 第三行}
+\newcommand{\linsys}[1]{%
+  \ensuremath{%
+    \begingroup
+    \renewcommand{\arraystretch}{0.75}%
+    \left\{\begin{array}{@{}l@{}}
+      #1
+    \end{array}\right.
+    \endgroup
+  }%
+}
+
+% 平行符号：把 \parallel 改成高中试卷常见的左倾双斜线
+\DeclareRobustCommand{\gktparallel}{\mathrel{\slash\mkern-5.8mu\slash}}
+\AtBeginDocument{\let\gktoldparallel\parallel\let\parallel\gktparallel}
+
+% 圈号数字修正：不依赖 newunicodechar，直接把 Unicode 圈号字符设为活动字符
+\DeclareRobustCommand{\gktcircled}[1]{%
+  \ifmmode
+    \text{\gktcircledtext{#1}}%
+  \else
+    \gktcircledtext{#1}%
+  \fi
+}
+
+\newcommand{\gktcircledtext}[1]{%
+  \tikz[baseline=(gktcirclednode.base)]{%
+    \node[
+      draw,
+      circle,
+      inner sep=0pt,
+      minimum size=0.9em,
+      line width=0.42pt,
+      font=\fontsize{8pt}{8pt}\selectfont
+    ] (gktcirclednode) {#1};%
+  }%
+}
+
+\begingroup
+  \catcode`①=\active \protected\gdef①{\gktcircled{1}}%
+  \catcode`②=\active \protected\gdef②{\gktcircled{2}}%
+  \catcode`③=\active \protected\gdef③{\gktcircled{3}}%
+  \catcode`④=\active \protected\gdef④{\gktcircled{4}}%
+  \catcode`⑤=\active \protected\gdef⑤{\gktcircled{5}}%
+  \catcode`⑥=\active \protected\gdef⑥{\gktcircled{6}}%
+  \catcode`⑦=\active \protected\gdef⑦{\gktcircled{7}}%
+  \catcode`⑧=\active \protected\gdef⑧{\gktcircled{8}}%
+  \catcode`⑨=\active \protected\gdef⑨{\gktcircled{9}}%
+  \catcode`⑩=\active \protected\gdef⑩{\gktcircled{10}}%
+  \catcode`⑪=\active \protected\gdef⑪{\gktcircled{11}}%
+  \catcode`⑫=\active \protected\gdef⑫{\gktcircled{12}}%
+  \catcode`⑬=\active \protected\gdef⑬{\gktcircled{13}}%
+  \catcode`⑭=\active \protected\gdef⑭{\gktcircled{14}}%
+  \catcode`⑮=\active \protected\gdef⑮{\gktcircled{15}}%
+  \catcode`⑯=\active \protected\gdef⑯{\gktcircled{16}}%
+  \catcode`⑰=\active \protected\gdef⑰{\gktcircled{17}}%
+  \catcode`⑱=\active \protected\gdef⑱{\gktcircled{18}}%
+  \catcode`⑲=\active \protected\gdef⑲{\gktcircled{19}}%
+  \catcode`⑳=\active \protected\gdef⑳{\gktcircled{20}}%
+\endgroup
+
+\catcode`①=\active
+\catcode`②=\active
+\catcode`③=\active
+\catcode`④=\active
+\catcode`⑤=\active
+\catcode`⑥=\active
+\catcode`⑦=\active
+\catcode`⑧=\active
+\catcode`⑨=\active
+\catcode`⑩=\active
+\catcode`⑪=\active
+\catcode`⑫=\active
+\catcode`⑬=\active
+\catcode`⑭=\active
+\catcode`⑮=\active
+\catcode`⑯=\active
+\catcode`⑰=\active
+\catcode`⑱=\active
+\catcode`⑲=\active
+\catcode`⑳=\active

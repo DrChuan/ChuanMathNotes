@@ -1,0 +1,42 @@
+\section{自然数公理}
+
+满足以下性质的集合 $N$ 称为自然数集：
+\begin{enumerate}
+    \item $0 \in N$；
+    \item $\forall n \in N$，有唯一后继 $n^+$；
+    \item $\forall n \in N$，$n^+ \ne 0$；
+    \item 若 $m \ne n$，则 $m^+ \ne n^+$；
+    \item 若 $E \subseteq N$，$0 \in E$，且 $\forall n \in E$，$n^+ \in E$，则 $N = E$. 
+\end{enumerate}
+
+$N$ 上的加法：$\forall m,n \in N$，
+\[
+n + 0 = n,\qquad m + n^+ = (m+n)^+.
+\]
+
+关于 $\mathbb{Q}$：
+\begin{itemize}
+    \item 稠密性；
+    \item 阿基米德性：若 $p \in \mathbb{Q}^+$，$q \in \mathbb{Q}$，则 $\exists n \in N$ s.t. $np > q$. 
+\end{itemize}
+
+\begin{theorem}[数学归纳法]
+设 $P_0,\dots,P_n,\dots$ 是一列命题. 若
+\begin{enumerate}
+    \item $P_0$ 成立；
+    \item 若对某个 $n \in N$，$P_n$ 成立，则 $P_{n+1}$ 成立，
+\end{enumerate}
+则 $\forall n \in N$，$P_n$ 成立. 
+\end{theorem}
+
+\begin{proof}
+设
+\[
+E=\{n \mid P_n \text{成立}\}.
+\]
+则 $E \subseteq N$，且 $0 \in E$. 
+
+若 $n \in E$，则 $P_n$ 成立. 由条件 (2) 可知 $P_{n+1}$ 成立，因此 $n^+ \in E$. 
+
+由公理 (5)，$E=N$. 故 $\forall n \in N$，$P_n$ 成立. 
+\end{proof}

@@ -18,7 +18,7 @@
 \usepackage{hyperref} % 交叉引用和超链接
 \usepackage[utf8]{inputenc}
 \usepackage[dvipsnames]{xcolor} % 颜色包
-\usepackage{tcolorbox} % 精美文本框
+\usepackage[skins, breakable]{tcolorbox} % 精美文本框
 \usepackage{thmtools} % 定理环境管理
 \usepackage{environ} % 用于捕获环境体（做答案开关）
 \usepackage{tasks} % 优雅排版选择题
@@ -41,7 +41,7 @@
     BoldFont = * ,
     AutoFakeBold = true
 ]
-\setCJKfamilyfont{hei}{SimHei}[Path = ./ , Extension = .ttf , AutoFakeBold = true]
+\setCJKfamilyfont{hei}{SimHei}[Path = ./ , Extension = .ttf , AutoFakeBold = false]
 \newcommand{\heiti}{\CJKfamily{hei}}
 \setCJKfamilyfont{kaishu}{SimKai.ttf}[Path = ./ ]
 \newcommand{\kaishu}{\CJKfamily{kaishu}}
@@ -146,6 +146,49 @@
 ]{thmgray}
 \declaretheorem[style=thmgray, name={\heiti 例题}, numberwithin=section]{example}
 
+% 定义一个左侧带灰色粗线的环境
+\newtcolorbox{notebox}{
+    blanker, 
+    borderline west={3pt}{0pt}{gray!50}, 
+    left=10pt, 
+    top=4pt, 
+    bottom=4pt
+}
+
+% 1. 定义深紫色
+\definecolor{proofpurple}{HTML}{4A148C} 
+
+% 2. 重新定义 proof 环境（极弱底色 + 紫色首尾 + 黑色楷体正文）
+\makeatletter
+\renewenvironment{proof}[1][证明]{
+    \begin{tcolorbox}[
+        enhanced,      % 开启高级外观控制
+        breakable,     % 允许跨页
+        frame hidden,  % 隐藏四周的边框线
+        colback=proofpurple!3, % 极其微弱的底色：3% 的深紫色混合 97% 的白色
+        sharp corners, % 直角边缘，更具学术感
+        boxsep=0pt,
+        left=10pt, right=10pt, top=8pt, bottom=8pt, % 框内留白
+        before skip=12pt, after skip=12pt % 框外上下间距
+    ]
+    % 标题部分：深紫色 + 黑体
+    \noindent\textcolor{proofpurple}{\heiti #1：}\ignorespaces
+    % 正文部分：开启楷体（默认黑色）
+    \kaishu
+}{
+    % 结尾部分：靠右的深紫色实心方块
+    \hfill\textcolor{proofpurple}{$\blacksquare$}
+    \end{tcolorbox}
+}
+\makeatother
+
+\newcommand{\sepline}{
+    \par\vspace{1em} % 线上方的间距
+    \noindent\textcolor{gray!40}{\rule{\textwidth}{0.5pt}} % 40%浓度的灰色细线
+    \par\vspace{1em} % 线下方的间距
+}
+
+\newcommand{\summary}[1]{{\kaishu \textcolor{cyan}{#1}}}
 % ==========================================
 % 5. 高中题库专用环境 (题目、开关、选择题)
 % ==========================================
