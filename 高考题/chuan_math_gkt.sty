@@ -514,3 +514,52 @@
 \catcode`⑱=\active
 \catcode`⑲=\active
 \catcode`⑳=\active
+
+
+% ===== 解答题排版微调：题干首行缩进，小问首行缩进且后续悬挂 =====
+\usepackage{enumitem}
+
+% 只重定义解答题环境，不影响 examquestions，所以选择题、填空题仍保持原来的悬挂
+\RenewDocumentEnvironment{examanswers}{O{start=1}}
+{%
+  \begin{enumerate}[
+    label=\arabic*.,
+    #1,
+    leftmargin=0pt,
+    labelwidth=2em,
+    labelsep=0.35em,
+    itemindent=2.35em,
+    listparindent=2em,
+    align=left,
+    itemsep=1.0em,
+    parsep=0em,
+    topsep=0.3em
+  ]%
+  \setlength{\parindent}{2em}%
+}
+{%
+  \end{enumerate}%
+}
+
+% 解答题小问：开头空两格，后续行悬挂到“）”后面
+\newlength{\gktsubqlabelwidth}
+
+\newcommand{\subq}[2]{%
+  \par
+  \settowidth{\gktsubqlabelwidth}{#1\hspace{0.25em}}%
+  \begin{list}{}{%
+    \setlength{\leftmargin}{\dimexpr 2em+\gktsubqlabelwidth\relax}%
+    \setlength{\rightmargin}{0pt}%
+    \setlength{\itemindent}{0pt}%
+    \setlength{\labelwidth}{\gktsubqlabelwidth}%
+    \setlength{\labelsep}{0pt}%
+    \setlength{\topsep}{0pt}%
+    \setlength{\partopsep}{0pt}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\parskip}{0pt}%
+    \setlength{\itemsep}{0.15em}%
+    \setlength{\listparindent}{0pt}%
+  }%
+  \item[#1\hspace{0.25em}] #2%
+  \end{list}%
+}
