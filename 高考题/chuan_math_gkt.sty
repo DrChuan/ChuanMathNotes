@@ -421,6 +421,17 @@
   \par\choiceaftersep
 }
 
+% 图形选项：用于原卷中 2×2 排列的函数图像选项，保持原图比例. 
+\newcommand{\graphchoicesoneline}[4]{%
+  \par\choicevsep
+  \noindent
+  {\renewcommand{\arraystretch}{1.10}%
+  \begin{tabular}{@{}p{0.23\textwidth}p{0.23\textwidth}p{0.23\textwidth}p{0.23\textwidth}@{}}
+    A. #1 & B. #2 & C. #3 & D. #4
+  \end{tabular}}%
+  \par\choiceaftersep
+}
+
 % 右侧环绕图片
 % 用法：\rightwrapfig[宽度][上移量][下方留白]{图片路径}
 \NewDocumentCommand{\rightwrapfig}{O{0.32\linewidth} O{-1.2em} O{-0.5em} m}{%
@@ -531,7 +542,7 @@
     itemindent=2.35em,
     listparindent=2em,
     align=left,
-    itemsep=1.0em,
+    itemsep=2.0em,
     parsep=0em,
     topsep=0.3em
   ]%

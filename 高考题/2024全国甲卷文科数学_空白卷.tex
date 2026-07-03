@@ -35,7 +35,7 @@
 \item 曲线 $f(x)=x^6+3x-1$ 在 $(0,-1)$ 处的切线与坐标轴围成的面积为
 \fourchoices{\tallchoice{$\dfrac16$}}{\tallchoice{$\dfrac{\sqrt3}{2}$}}{\tallchoice{$\dfrac12$}}{\tallchoice{$-\dfrac{\sqrt3}{2}$}}
 \item 函数 $f(x)=-x^2+(e^x-e^{-x})\sin x$ 在区间 $[-2.8,2.8]$ 的大致图像为
-\graphchoices{\includegraphics[width=3.4cm]{figures/2024_jiawen_q8_A.png}}{\includegraphics[width=3.4cm]{figures/2024_jiawen_q8_B.png}}{\includegraphics[width=3.4cm]{figures/2024_jiawen_q8_C.png}}{\includegraphics[width=3.4cm]{figures/2024_jiawen_q8_D.png}}
+\graphchoicesoneline{\includegraphics[width=2.6cm]{figures/2024_jiali_q7_A.png}}{\includegraphics[width=2.6cm]{figures/2024_jiali_q7_B.png}}{\includegraphics[width=2.6cm]{figures/2024_jiali_q7_C.png}}{\includegraphics[width=2.6cm]{figures/2024_jiali_q7_D.png}}
 \item 已知 $\dfrac{\cos\alpha}{\cos\alpha-\sin\alpha}=\sqrt3$，则 $\tan\left(\alpha+\dfrac{\pi}{4}\right)=$
 \fourchoices{$2\sqrt3+1$}{$2\sqrt3-1$}{\tallchoice{$\dfrac{\sqrt3}{2}$}}{$1-\sqrt3$}
 \item 已知直线$ax+by-a+2b=0$与圆$C:x^2+y^2+4y-1=0$交于$A,B$两点，则$|AB|$的最小值为
@@ -53,60 +53,97 @@
 \item 曲线 $y=x^3-3x$ 与 $y=-(x-1)^2+a$ 在 $(0,+\infty)$ 上有两个不同交点，则 $a$ 的取值范围为\blank. 
 \end{examquestions}
 \examsection{三、解答题：共70分. 解答应写出文字说明、证明过程或演算步骤. 第17题～第21题为必考题，每个考题考生必须作答. 第22、23题为选考题，考生根据要求作答. }
-\examsection{（一）必考题：共60分. }
 \begin{examanswers}[start=17]
+    \newpage
 \item（12分）
 
 已知等比数列 $\{a_n\}$ 的前 $n$ 项和为 $S_n$，且 $2S_n=3a_{n+1}-3$. 
 
-（1）求 $\{a_n\}$ 的通项公式；
+\subq{（1）}{求 $\{a_n\}$ 的通项公式；}
 
-（2）求数列 $\{S_n\}$ 的通项公式. 
+\subq{（2）}{求数列 $\{S_n\}$ 的通项公式.}
+
 \item（12分）
 
+某工厂进行生产线智能化升级改造，升级改造后，从该工厂甲、乙两个车间产品中随机抽取150件进行检验，数据如下：
+\begin{tightcenter}
+{\renewcommand{\arraystretch}{0.9}
+\begin{tabular}{|c|c|c|c|c|}
+\hline & 优级品 & 合格品 & 不合格品 & 总计\\ \hline
+甲车间 & 26 & 24 & 0 & 50\\ \hline
+乙车间 & 70 & 28 & 2 & 100\\ \hline
+总计 & 96 & 52 & 2 & 150\\ \hline
+\end{tabular}}
+\end{tightcenter}
+\subq{（1）}{填写如下列联表：\begin{tightcenter}
+    {\renewcommand{\arraystretch}{0.9}
+\begin{tabular}{|c|c|c|}
+\hline & 优级品 & 非优级品\\ \hline
+甲车间 & & \\ \hline
+乙车间 & & \\ \hline
+\end{tabular}}
+\end{tightcenter}
+能否有95\%的把握认为甲、乙两车间产品的优级品率存在差异？能否有99\%的把握认为甲、乙两车间产品的优级品率存在差异？
+}
+
+\subq{（2）}{已知升级改造前该工厂产品的优级品率 $p=0.5$，设 $\overline p$ 为升级改造后抽取的 $n$ 件产品的优级品率. 如果 $\overline p>p+1.65\sqrt{\dfrac{p(1-p)}{n}}$，则认为该工厂产品的优级品率提高了，根据抽取的150件产品的数据，能否认为生产线智能化升级改造后，该工厂产品的优级品率提高了？（$\sqrt{150}\approx12.247$）
+附：$K^2=\dfrac{n(ad-bc)^2}{(a+b)(c+d)(a+c)(b+d)}$. 
+\begin{tightcenter}
+    {\renewcommand{\arraystretch}{0.9}
+\begin{tabular}{|c|c|c|c|}
+\hline $P(K^2\geq k)$ & 0.050 & 0.010 & 0.001\\ \hline
+$k$ & 3.841 & 6.635 & 10.828\\ \hline
+\end{tabular}}
+\end{tightcenter}
+}
+
+\newpage
+\item（12分）
 如图，在以 $A,B,C,D,E,F$ 为顶点的五面体中，四边形 $ABCD$ 与四边形 $ADEF$ 均为等腰梯形，$BC\parallel AD,EF\parallel AD$，$AD=4,AB=BC=EF=2$，$ED=\sqrt{10},FB=2\sqrt3$，$M$ 为 $AD$ 的中点. 
 
 \noindent\begin{minipage}[t]{0.64\linewidth}
-（1）证明：$BM\parallel$ 平面 $CDE$；
+\subq{（1）}{证明：$BM\parallel$ 平面 $CDE$；}
 
-（2）求点 $M$ 到 $ABF$ 的距离. 
+\subq{（2）}{求点 $M$ 到 $ABF$ 的距离.}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.23\linewidth}
 \vspace{-2.6em}
 \centering
 \includegraphics[width=\linewidth]{figures/2024_jiawen_q16.png}
 \end{minipage}
+\vspace{-3.5em}
 \item（12分）
 
 已知函数 $f(x)=a(x-1)-\ln x+1$. 
 
-（1）求 $f(x)$ 的单调区间；
+\subq{（1）}{求 $f(x)$ 的单调区间；}
 
-（2）若 $a\leq2$ 时，证明：当 $x>1$ 时，$f(x)<e^{x-1}$ 恒成立. 
+\subq{（2）}{若 $a\leq2$ 时，证明：当 $x>1$ 时，$f(x)<e^{x-1}$ 恒成立.}
+\vspace{-0.6em}
 \item（12分）
 
-设椭圆 $C:\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1(a>b>0)$ 的右焦点为 $F$，点 $M\left(1,\dfrac32\right)$ 在 $C$ 上，且 $MF\perp x$ 轴. 
+设椭圆 $C:\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1(a>b>0)$ 的右焦点为 $F$，点 $M\left(1,\dfrac32\right)$ 在 $C$ 上，$MF\perp x$ 轴. 
 
-（1）求 $C$ 的方程；
+\subq{（1）}{求 $C$ 的方程；}
 
-（2）过点 $P(4,0)$ 的直线与 $C$ 交于 $A,B$ 两点，$N$ 为线段 $FP$ 的中点，直线 $NB$ 交直线 $MF$ 于点 $Q$，证明：$AQ\perp y$ 轴. 
+\subq{（2）}{过点 $P(4,0)$ 的直线与 $C$ 交于 $A,B$ 两点，$N$ 为线段 $FP$ 的中点，直线 $NB$ 交直线 $MF$ 于点 $Q$，证明：$AQ\perp y$ 轴.}
 \end{examanswers}
-\examsection{（二）选考题：共10分. 请考生在第22、23题中任选一题作答，并用2B铅笔将所选题号涂黑，多涂、错涂、漏涂均不给分，如果多做，则按所做的第一题计分. }
-\begin{examanswers}[start=19]
+\begin{examanswers}[start=22]
+\vspace{0.7em}
 \item（10分）【选修4-4：坐标系与参数方程】
 
 在平面直角坐标系 $xOy$ 中，以坐标原点 $O$ 为极点，$x$ 轴的正半轴为极轴建立极坐标系，曲线 $C$ 的极坐标方程为 $\rho=\rho\cos\theta+1$. 
 
-（1）写出 $C$ 的直角坐标方程；
+\subq{（1）}{写出 $C$ 的直角坐标方程；}
 
-（2）设直线 $l:$\linsys{x=t,\\y=t+a}（$t$ 为参数），若 $C$ 与 $l$ 相交于 $A,B$ 两点，若 $|AB|=2$，求 $a$ 的值. 
+\subq{（2）}{设直线 $l:$\linsys{x=t,\\y=t+a}（$t$ 为参数），若 $C$ 与 $l$ 相交于 $A,B$ 两点，若 $|AB|=2$，求 $a$ 的值.}
 \item（10分）【选修4-5：不等式选讲】
 
 实数 $a,b$ 满足 $a+b\geq3$. 
 
-（1）证明：$2a^2+2b^2>a+b$；
+\subq{（1）}{证明：$2a^2+2b^2>a+b$；}
 
-（2）证明：$|a-2b^2|+|b-2a^2|\geq6$. 
+\subq{（2）}{证明：$|a-2b^2|+|b-2a^2|\geq6$.}
 \end{examanswers}
 
 \end{document}
